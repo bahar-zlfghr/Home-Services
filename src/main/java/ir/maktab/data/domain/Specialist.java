@@ -20,16 +20,13 @@ public class Specialist extends User {
     @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST)
     private Set<SubService> subServices = new HashSet<>();
 
-    @OneToMany(
-            mappedBy = "specialist",
-            cascade = {CascadeType.ALL, CascadeType.PERSIST},
-            orphanRemoval = true)
+    @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST)
+    private Set<Service> services = new HashSet<>();
+
+    @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true)
     private Set<Offer> offers = new HashSet<>();
 
-    @OneToMany(
-            mappedBy = "specialist",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders = new HashSet<>();
 
     public String getSpecialty() {
@@ -65,6 +62,15 @@ public class Specialist extends User {
 
     public Specialist setSubServices(Set<SubService> subServices) {
         this.subServices = subServices;
+        return this;
+    }
+
+    public Set<Service> getServices() {
+        return services;
+    }
+
+    public Specialist setServices(Set<Service> services) {
+        this.services = services;
         return this;
     }
 
