@@ -21,7 +21,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("UPDATE Customer AS c SET c.orders = :orders WHERE c.id = :id")
     void updateCustomerOrders(@Param("id") Integer id, @Param("orders") List<Order> orders);
 
-    @Query("UPDATE Customer AS c SET c.password = :password WHERE c.email = :email AND c.password = :previousPassword")
+    @Query("UPDATE Customer AS c SET c.password = :newPassword WHERE c.email = :email AND c.password = :previousPassword")
     void updateCustomerPassword(@Param("email") String email, @Param("previousPassword") String previousPassword, @Param("newPassword") String newPassword);
 
     Optional<Customer> getCustomerByEmail(String email);
