@@ -1,5 +1,7 @@
 package ir.maktab.data.domain;
 
+import ir.maktab.data.enums.PersonRole;
+
 import javax.persistence.*;
 
 /**
@@ -22,6 +24,9 @@ public class Person {
 
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private PersonRole role;
 
     public Integer getId() {
         return id;
@@ -65,6 +70,15 @@ public class Person {
 
     public Person setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public PersonRole getRole() {
+        return role;
+    }
+
+    public Person setRole(PersonRole role) {
+        this.role = role;
         return this;
     }
 }
