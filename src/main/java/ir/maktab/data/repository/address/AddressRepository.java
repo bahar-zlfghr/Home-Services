@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
@@ -21,6 +21,6 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
     @Query("UPDATE Address AS a SET a.formatted_address = :formatted_address WHERE a.id = :id")
     void updateAlleyAddress(@Param("id") Integer id, @Param("formatted_address") String formatted_address);
 
-    List<Address> getAddressesByCity(String city);
-    List<Address> getAddressesByState(String state);
+    Set<Address> getAddressesByCity(String city);
+    Set<Address> getAddressesByState(String state);
 }
