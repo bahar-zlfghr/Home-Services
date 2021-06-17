@@ -19,6 +19,9 @@ public class Service {
     @OneToMany(mappedBy = "service", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true)
     private Set<SubService> subServices = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private Set<Specialist> specialists;
+
     public Integer getId() {
         return id;
     }
@@ -43,6 +46,15 @@ public class Service {
 
     public Service setSubServices(Set<SubService> subServices) {
         this.subServices = subServices;
+        return this;
+    }
+
+    public Set<Specialist> getSpecialists() {
+        return specialists;
+    }
+
+    public Service setSpecialists(Set<Specialist> specialists) {
+        this.specialists = specialists;
         return this;
     }
 }
