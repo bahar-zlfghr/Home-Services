@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
@@ -19,7 +19,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     void updateCustomerStatus(@Param("id") Integer id, @Param("orders") UserStatus status);
 
     @Query("UPDATE Customer AS c SET c.orders = :orders WHERE c.id = :id")
-    void updateCustomerOrders(@Param("id") Integer id, @Param("orders") List<Order> orders);
+    void updateCustomerOrders(@Param("id") Integer id, @Param("orders") Set<Order> orders);
 
     @Query("UPDATE Customer AS c SET c.password = :newPassword WHERE c.email = :email AND c.password = :previousPassword")
     void updateCustomerPassword(@Param("email") String email, @Param("previousPassword") String previousPassword, @Param("newPassword") String newPassword);
