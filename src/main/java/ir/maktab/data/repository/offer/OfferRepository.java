@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
@@ -25,9 +25,9 @@ public interface OfferRepository extends JpaRepository<Offer, Integer>, JpaSpeci
     @Query("UPDATE Offer AS o SET o.status = :status WHERE o.id = :id")
     void updateOfferStatus(@Param("id") Integer id, @Param("status") OfferStatus offerStatus);
 
-    List<Offer> getOffersBySpecialist(Specialist specialist);
+    Set<Offer> getOffersBySpecialist(Specialist specialist);
 
-    List<Offer> getOffersByOrder(Order order);
+    Set<Offer> getOffersByOrder(Order order);
 
     static Specification<Offer> getSortedOffersBySuggestedPriceOrScore(boolean suggestedPrice, boolean score) {
         return (Specification<Offer>) (root, query, criteriaBuilder) -> {
