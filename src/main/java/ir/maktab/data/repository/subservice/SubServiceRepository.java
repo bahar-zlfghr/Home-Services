@@ -24,8 +24,8 @@ public interface SubServiceRepository extends JpaRepository<SubService, Integer>
     @Query("UPDATE SubService AS s SET s.description = :description WHERE s.id = :id")
     void updateSubServiceDescription(@Param("id") Integer id, @Param("description") String description);
 
-    @Query("UPDATE SubService AS s SET s.specialists = :specialists WHERE s.id = :subServiceId")
-    void updateSubServiceSpecialists(@Param("subServiceId") Integer subServiceId, @Param("specialists") Set<Specialist> specialists);
+    @Query("UPDATE SubService AS s SET s.specialists = :specialists WHERE s.id = :id")
+    void updateSubServiceSpecialists(@Param("subServiceId") Integer id, @Param("specialists") Set<Specialist> specialists);
 
     Optional<SubService> getSubServiceByName(String name);
 
