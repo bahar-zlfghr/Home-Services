@@ -3,6 +3,7 @@ package ir.maktab.data.repository.offer;
 import ir.maktab.data.domain.Offer;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -10,6 +11,7 @@ import javax.persistence.criteria.Root;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public interface OfferSpecification extends JpaSpecificationExecutor<Offer> {
 
     static Specification<Offer> getSortedOffersBySuggestedPriceOrScore(boolean suggestedPrice, boolean score) {

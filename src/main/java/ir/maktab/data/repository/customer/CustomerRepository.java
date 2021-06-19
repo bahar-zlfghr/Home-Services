@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
 
     @Query("UPDATE Customer AS c SET c.status = :status WHERE c.id = :id")

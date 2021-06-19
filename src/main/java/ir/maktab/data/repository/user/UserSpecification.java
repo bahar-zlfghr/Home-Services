@@ -7,6 +7,7 @@ import ir.maktab.dtos.filter.UserFilterDto;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public interface UserSpecification extends JpaRepository<User, Integer>, JpaSpecificationExecutor<Customer> {
 
     static Specification<Customer> filterCustomers(UserFilterDto userFilterDto) {

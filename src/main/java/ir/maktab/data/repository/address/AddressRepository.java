@@ -4,12 +4,14 @@ import ir.maktab.data.domain.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 
     @Query("UPDATE Address AS a SET a.city = :city WHERE a.id = :id")

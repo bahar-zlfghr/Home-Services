@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface SpecialistRepository extends JpaRepository<Specialist, Integer>, JpaSpecificationExecutor<Specialist> {
 
     @Query("UPDATE Specialist AS s SET s.specialty = :specialty WHERE s.id = :id")

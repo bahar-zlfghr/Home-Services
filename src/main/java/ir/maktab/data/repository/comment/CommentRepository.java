@@ -7,6 +7,7 @@ import ir.maktab.data.domain.Specialist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import java.util.Optional;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     @Query("UPDATE Comment AS c SET c.score = :score WHERE c.id = :id")

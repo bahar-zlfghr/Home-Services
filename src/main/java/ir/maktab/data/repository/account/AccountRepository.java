@@ -4,12 +4,14 @@ import ir.maktab.data.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Query("UPDATE Account AS a SET a.balance = :balance WHERE a.id = :id")

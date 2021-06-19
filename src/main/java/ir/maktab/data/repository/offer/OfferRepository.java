@@ -7,12 +7,14 @@ import ir.maktab.data.enums.OfferStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface OfferRepository extends JpaRepository<Offer, Integer> {
 
     @Query("UPDATE Offer AS o SET o.suggestedPrice = :suggestedPrice WHERE o.id = :id")

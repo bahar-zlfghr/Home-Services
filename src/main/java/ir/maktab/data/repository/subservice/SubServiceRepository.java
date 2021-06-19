@@ -6,6 +6,7 @@ import ir.maktab.data.domain.SubService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.Set;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Repository
 public interface SubServiceRepository extends JpaRepository<SubService, Integer> {
 
     @Query("UPDATE SubService AS s SET s.name = :name WHERE s.id = :id")
@@ -25,7 +27,7 @@ public interface SubServiceRepository extends JpaRepository<SubService, Integer>
     void updateSubServiceDescription(@Param("id") Integer id, @Param("description") String description);
 
     @Query("UPDATE SubService AS s SET s.specialists = :specialists WHERE s.id = :id")
-    void updateSubServiceSpecialists(@Param("subServiceId") Integer id, @Param("specialists") Set<Specialist> specialists);
+    void updateSubServiceSpecialists(@Param("id") Integer id, @Param("specialists") Set<Specialist> specialists);
 
     Optional<SubService> getSubServiceByName(String name);
 
