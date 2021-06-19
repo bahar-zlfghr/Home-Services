@@ -1,9 +1,10 @@
 package ir.maktab.mappers.customer;
 
 import ir.maktab.data.domain.Customer;
+import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.CustomerDto;
+import ir.maktab.mappers.account.AccountMapper;
 import ir.maktab.mappers.order.OrderMapper;
-import ir.maktab.mappers.user.UserMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -15,25 +16,39 @@ import java.util.stream.Collectors;
 @Component
 public class CustomerMapperImpl implements CustomerMapper {
     private final OrderMapper orderMapper;
-    private final UserMapper userMapper;
+    private final AccountMapper accountMapper;
 
     @Lazy
-    public CustomerMapperImpl(OrderMapper orderMapper, UserMapper userMapper) {
+    public CustomerMapperImpl(OrderMapper orderMapper, AccountMapper accountMapper) {
         this.orderMapper = orderMapper;
-        this.userMapper = userMapper;
+        this.accountMapper = accountMapper;
     }
 
     @Override
     public Customer toCustomer(CustomerDto customerDto) {
-        Customer customer = (Customer) userMapper.toUser(customerDto);
-        return customer
-                .setOrders(customerDto.getOrderDtos().stream().map(orderMapper::toOrder).collect(Collectors.toSet()));
+        return (Customer) new Customer()
+                .setOrders(customerDto.getOrderDtos().stream().map(orderMapper::toOrder).collect(Collectors.toSet()))
+                .setStatus(customerDto.getStatus())
+                .setAccount(accountMapper.toAccount(customerDto.getAccountDto()))
+                .setId(customerDto.getId())
+                .setName(customerDto.getName())
+                .setFamily(customerDto.getFamily())
+                .setEmail(customerDto.getEmail())
+                .setPassword(customerDto.getPassword())
+                .setRole(PersonRole.valueOf(customerDto.getRole().toUpperCase()));
     }
 
     @Override
     public CustomerDto toCustomerDto(Customer customer) {
-        CustomerDto customerDto = (CustomerDto) userMapper.toUserDto(customer);
-        return customerDto
-                .setOrderDtos(customer.getOrders().stream().map(orderMapper::toOrderDto).collect(Collectors.toSet()));
+        return (CustomerDto) new CustomerDto()
+                .setOrderDtos(customer.getOrders().stream().map(orderMapper::toOrderDto).collect(Collectors.toSet()))
+                .setStatus(customer.getStatus())
+                .setAccountDto(accountMapper.toAccountDto(customer.getAccount()))
+                .setId(customer.getId())
+                .setName(customer.getName())
+                .setFamily(customer.getFamily())
+                .setEmail(customer.getEmail())
+                .setPassword(customer.getPassword())
+                .setRole(customer.getRole().getRole());
     }
 }

@@ -1,9 +1,9 @@
 package ir.maktab.mappers.user;
 
 import ir.maktab.data.domain.User;
+import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.UserDto;
 import ir.maktab.mappers.account.AccountMapper;
-import ir.maktab.mappers.person.PersonMapper;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,27 +11,35 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class UserMapperImpl implements UserMapper {
-    private final PersonMapper personMapper;
     private final AccountMapper accountMapper;
 
-    public UserMapperImpl(PersonMapper personMapper, AccountMapper accountMapper) {
-        this.personMapper = personMapper;
+    public UserMapperImpl(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
     }
 
     @Override
     public User toUser(UserDto userDto) {
-        User user = (User) personMapper.toPerson(userDto);
-        return user
+        return (User) new User()
                 .setStatus(userDto.getStatus())
-                .setAccount(accountMapper.toAccount(userDto.getAccountDto()));
+                .setAccount(accountMapper.toAccount(userDto.getAccountDto()))
+                .setId(userDto.getId())
+                .setName(userDto.getName())
+                .setFamily(userDto.getFamily())
+                .setEmail(userDto.getEmail())
+                .setPassword(userDto.getPassword())
+                .setRole(PersonRole.valueOf(userDto.getRole().toUpperCase()));
     }
 
     @Override
     public UserDto toUserDto(User user) {
-        UserDto userDto = (UserDto) personMapper.toPersonDto(user);
-        return userDto
-                .setStatus(userDto.getStatus())
-                .setAccountDto(accountMapper.toAccountDto(user.getAccount()));
+        return (UserDto) new UserDto()
+                .setStatus(user.getStatus())
+                .setAccountDto(accountMapper.toAccountDto(user.getAccount()))
+                .setId(user.getId())
+                .setName(user.getName())
+                .setFamily(user.getFamily())
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
+                .setRole(user.getRole().getRole());
     }
 }
