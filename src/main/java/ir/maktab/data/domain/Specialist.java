@@ -14,7 +14,8 @@ public class Specialist extends User {
 
     private Integer score;
 
-    @OneToOne(mappedBy = "specialist", cascade = {CascadeType.ALL, CascadeType.PERSIST})
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "profilePicture_id", foreignKey = @ForeignKey(name = "SPECIALIST_PROFILE_PICTURE_FK"))
     private ProfilePicture profilePicture;
 
     @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST)

@@ -17,8 +17,7 @@ public class ProfilePicture {
     @Basic(fetch = FetchType.LAZY)
     private byte[] data;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "specialist_id", foreignKey = @ForeignKey(name = "PROFILE_PICTURE_SPECIALIST_FK"))
+    @OneToOne(mappedBy = "profilePicture", cascade = {CascadeType.ALL, CascadeType.PERSIST})
     private Specialist specialist;
 
     public Integer getId() {
