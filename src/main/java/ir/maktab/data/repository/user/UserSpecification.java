@@ -16,10 +16,10 @@ import java.util.List;
 /**
  * @author : Bahar Zolfaghari
  **/
-public interface UserSpecification extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
+public interface UserSpecification extends JpaRepository<User, Integer>, JpaSpecificationExecutor<Customer> {
 
-    static Specification<User> filterCustomers(UserFilterDto userFilterDto) {
-        return (Specification<User>) (root, query, criteriaBuilder) -> {
+    static Specification<Customer> filterCustomers(UserFilterDto userFilterDto) {
+        return (Specification<Customer>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             CriteriaQuery<Customer> customerCriteriaQuery = criteriaBuilder.createQuery(Customer.class);
@@ -44,8 +44,8 @@ public interface UserSpecification extends JpaRepository<User, Integer>, JpaSpec
         };
     }
 
-    static Specification<User> filterSpecialists(UserFilterDto userFilterDto) {
-        return (Specification<User>) (root, query, criteriaBuilder) -> {
+    static Specification<Specialist> filterSpecialists(UserFilterDto userFilterDto) {
+        return (Specification<Specialist>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             CriteriaQuery<Specialist> specialistCriteriaQuery = criteriaBuilder.createQuery(Specialist.class);
