@@ -68,7 +68,7 @@ public class SubServiceServiceImpl implements SubServiceService {
         if (subServiceByName.isPresent()) {
             return subServiceMapper.toSubServiceDto(subServiceByName.get());
         }
-        throw new NotFoundSubServiceException("sub.service.not.found");
+        throw new NotFoundSubServiceException("{sub.service.not.found}");
     }
 
     @Override
