@@ -4,6 +4,7 @@ import ir.maktab.data.domain.Customer;
 import ir.maktab.data.domain.Order;
 import ir.maktab.data.enums.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -13,7 +14,7 @@ import java.util.Set;
 /**
  * @author : Bahar Zolfaghari
  **/
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
 
     @Query("UPDATE Customer AS c SET c.status = :status WHERE c.id = :id")
     void updateCustomerStatus(@Param("id") Integer id, @Param("status") UserStatus status);
@@ -25,4 +26,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     void updateCustomerPassword(@Param("email") String email, @Param("previousPassword") String previousPassword, @Param("newPassword") String newPassword);
 
     Optional<Customer> getCustomerByEmail(String email);
+    Optional<Customer> getCustomerByEmailAndPassword(String email, String password);
 }
