@@ -24,5 +24,5 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     Set<Comment> getCommentsByCustomer(Customer customer);
     Optional<Comment> getCommentByOrder(Order order);
-    Optional<Comment> getCommentBySpecialist(Specialist specialist);
+    Set<Comment> getCommentsBySpecialist(Specialist specialist);
 }
