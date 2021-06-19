@@ -1,4 +1,4 @@
-package ir.maktab.web;
+package ir.maktab.web.user;
 
 import ir.maktab.configuration.LastViewInterceptor;
 import ir.maktab.data.enums.PersonRole;
