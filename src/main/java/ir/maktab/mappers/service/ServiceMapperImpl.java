@@ -5,12 +5,14 @@ import ir.maktab.dtos.ServiceDto;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import ir.maktab.mappers.subservice.SubServiceMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class ServiceMapperImpl implements ServiceMapper {
     private final SubServiceMapper subServiceMapper;
     private final SpecialistMapper specialistMapper;

@@ -6,10 +6,12 @@ import ir.maktab.mappers.customer.CustomerMapper;
 import ir.maktab.mappers.order.OrderMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class CommentMapperImpl implements CommentMapper {
     private final CustomerMapper customerMapper;
     private final SpecialistMapper specialistMapper;

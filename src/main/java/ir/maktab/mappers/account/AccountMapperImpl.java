@@ -2,10 +2,12 @@ package ir.maktab.mappers.account;
 
 import ir.maktab.data.domain.Account;
 import ir.maktab.dtos.AccountDto;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class AccountMapperImpl implements AccountMapper {
 
     @Override

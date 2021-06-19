@@ -4,10 +4,12 @@ import ir.maktab.data.domain.ProfilePicture;
 import ir.maktab.dtos.ProfilePictureDto;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class ProfilePictureMapperImpl implements ProfilePictureMapper {
     private final SpecialistMapper specialistMapper;
 

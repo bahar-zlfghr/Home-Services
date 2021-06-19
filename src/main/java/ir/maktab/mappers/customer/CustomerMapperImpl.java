@@ -5,12 +5,14 @@ import ir.maktab.dtos.CustomerDto;
 import ir.maktab.mappers.order.OrderMapper;
 import ir.maktab.mappers.user.UserMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class CustomerMapperImpl implements CustomerMapper {
     private final OrderMapper orderMapper;
     private final UserMapper userMapper;

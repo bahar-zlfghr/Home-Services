@@ -2,10 +2,12 @@ package ir.maktab.mappers.address;
 
 import ir.maktab.data.domain.Address;
 import ir.maktab.dtos.AddressDto;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class AddressMapperImpl implements AddressMapper {
 
     @Override

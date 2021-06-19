@@ -4,10 +4,12 @@ import ir.maktab.data.domain.User;
 import ir.maktab.dtos.UserDto;
 import ir.maktab.mappers.account.AccountMapper;
 import ir.maktab.mappers.person.PersonMapper;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class UserMapperImpl implements UserMapper {
     private final PersonMapper personMapper;
     private final AccountMapper accountMapper;

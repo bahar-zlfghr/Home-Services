@@ -8,12 +8,14 @@ import ir.maktab.mappers.offer.OfferMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import ir.maktab.mappers.subservice.SubServiceMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class OrderMapperImpl implements OrderMapper {
     private final CustomerMapper customerMapper;
     private final SubServiceMapper subServiceMapper;

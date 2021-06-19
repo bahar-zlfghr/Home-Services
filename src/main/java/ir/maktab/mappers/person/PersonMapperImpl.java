@@ -2,10 +2,12 @@ package ir.maktab.mappers.person;
 
 import ir.maktab.data.domain.Person;
 import ir.maktab.dtos.PersonDto;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class PersonMapperImpl implements PersonMapper {
 
     @Override

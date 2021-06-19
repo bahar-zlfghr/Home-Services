@@ -5,10 +5,12 @@ import ir.maktab.dtos.OfferDto;
 import ir.maktab.mappers.order.OrderMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Bahar Zolfaghari
  **/
+@Component
 public class OfferMapperImpl implements OfferMapper {
     private final OrderMapper orderMapper;
     private final SpecialistMapper specialistMapper;
