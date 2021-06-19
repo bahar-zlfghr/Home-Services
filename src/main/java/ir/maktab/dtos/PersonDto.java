@@ -1,19 +1,33 @@
 package ir.maktab.dtos;
 
-import ir.maktab.data.enums.PersonRole;
+import ir.maktab.validationgroup.RegistrationGroup;
+import ir.maktab.validators.Password;
 
-import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * @author : Bahar Zolfaghari
  **/
 public class PersonDto {
     private Integer id;
+
+    @Size(min = 3, max = 30, message = "{user.name.range}", groups = {RegistrationGroup.class})
     private String name;
+
+    @Size(min = 3, max = 30, message = "{user.family.range}", groups = {RegistrationGroup.class})
     private String family;
+
+    @NotBlank(message = "{user.email.valid}", groups = {RegistrationGroup.class})
+    @Email(message = "{user.email.valid}", groups = {RegistrationGroup.class})
     private String email;
+
+    @Password(groups = {RegistrationGroup.class})
     private String password;
-    private PersonRole role;
+
+    @NotBlank(message = "{user.role.required}", groups = {RegistrationGroup.class})
+    private String role;
 
     public Integer getId() {
         return id;
@@ -60,11 +74,11 @@ public class PersonDto {
         return this;
     }
 
-    public PersonRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public PersonDto setRole(PersonRole role) {
+    public PersonDto setRole(String role) {
         this.role = role;
         return this;
     }
