@@ -16,7 +16,7 @@ import java.util.Set;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query("UPDATE Customer AS c SET c.status = :status WHERE c.id = :id")
-    void updateCustomerStatus(@Param("id") Integer id, @Param("orders") UserStatus status);
+    void updateCustomerStatus(@Param("id") Integer id, @Param("status") UserStatus status);
 
     @Query("UPDATE Customer AS c SET c.orders = :orders WHERE c.id = :id")
     void updateCustomerOrders(@Param("id") Integer id, @Param("orders") Set<Order> orders);
