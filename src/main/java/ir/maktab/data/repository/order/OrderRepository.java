@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
@@ -31,6 +31,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("UPDATE Order AS o SET o.specialist = :specialist WHERE o.id = :id")
     void updateOrderSpecialist(@Param("id") Integer id, @Param("specialist") Specialist specialist);
 
-    List<Order> getOrdersByCustomer(Customer customer);
-    List<Order> getOrdersBySpecialist(Specialist specialist);
+    Set<Order> getOrdersByCustomer(Customer customer);
+    Set<Order> getOrdersBySpecialist(Specialist specialist);
 }
