@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h3> ${role} Saved Successfully. </h3>
+<h3><button type="button" class="btn btn-lg btn-success" disabled> ${role} Saved Successfully. </button></h3>
 
 <table class="table table-bordered table-striped text-info">
     <tr>
