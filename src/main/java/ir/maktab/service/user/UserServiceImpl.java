@@ -6,6 +6,7 @@ import ir.maktab.data.repository.user.UserSpecification;
 import ir.maktab.dtos.UserDto;
 import ir.maktab.dtos.filter.UserFilterDto;
 import ir.maktab.mappers.user.UserMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * @author : Bahar Zolfaghari
  **/
+@Service
 public class UserServiceImpl implements UserService {
     private final CustomerRepository customerRepository;
     private final SpecialistRepository specialistRepository;
