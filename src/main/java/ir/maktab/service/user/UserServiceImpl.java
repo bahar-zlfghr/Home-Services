@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 /**
  * @author : Bahar Zolfaghari
  **/
-public class UserFilterServiceImpl implements UserFilterService {
+public class UserServiceImpl implements UserService {
     private final CustomerRepository customerRepository;
     private final SpecialistRepository specialistRepository;
     private final UserMapper userMapper;
 
-    public UserFilterServiceImpl(CustomerRepository customerRepository, SpecialistRepository specialistRepository, UserMapper userMapper) {
+    public UserServiceImpl(CustomerRepository customerRepository, SpecialistRepository specialistRepository, UserMapper userMapper) {
         this.customerRepository = customerRepository;
         this.specialistRepository = specialistRepository;
         this.userMapper = userMapper;
