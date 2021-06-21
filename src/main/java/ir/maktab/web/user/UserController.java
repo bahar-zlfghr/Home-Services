@@ -12,8 +12,6 @@ import ir.maktab.exceptions.NotEmptySpecialtyException;
 import ir.maktab.service.customer.CustomerService;
 import ir.maktab.service.specialist.SpecialistService;
 import ir.maktab.validationgroup.RegistrationGroup;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -40,8 +38,6 @@ public class UserController {
         this.specialistService = specialistService;
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
-    @Secured({"ROLE_MANAGER"})
     @GetMapping("/registration")
     public ModelAndView registrationUserForm() {
         return new ModelAndView(
@@ -50,8 +46,6 @@ public class UserController {
         );
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
-    @Secured({"ROLE_MANAGER"})
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute("userDto") @Validated(RegistrationGroup.class) UserDto userDto,
                                @RequestParam("specialty") @Validated(RegistrationGroup.class) String specialty,
