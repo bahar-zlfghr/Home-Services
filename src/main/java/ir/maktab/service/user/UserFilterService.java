@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author : Bahar Zolfaghari
  **/
-public interface UserFilter {
+public interface UserFilterService {
 
     Set<UserDto> filterUsers(UserFilterDto userFilterDto);
 }
