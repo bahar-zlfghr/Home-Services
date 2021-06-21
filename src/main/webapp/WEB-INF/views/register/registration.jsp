@@ -6,7 +6,7 @@
     <title> Registration Page </title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo="> <%-- fix favicon.ico error!--%>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link href="${pageContext.request.contextPath}/static/css/registration.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/static/js/registration.js"></script>
 </head>
