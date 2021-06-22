@@ -2,14 +2,15 @@ package ir.maktab.service.user;
 
 import ir.maktab.data.repository.customer.CustomerRepository;
 import ir.maktab.data.repository.specialist.SpecialistRepository;
-import ir.maktab.data.repository.user.UserSpecification;
-import ir.maktab.dtos.UserDto;
+import ir.maktab.data.repository.user.CustomerSpecification;
+import ir.maktab.data.repository.user.SpecialistSpecification;
 import ir.maktab.dtos.filter.UserFilterDto;
-import ir.maktab.mappers.user.UserMapper;
+import ir.maktab.dtos.filter.UserFilterResult;
+import ir.maktab.mappers.customer.CustomerMapper;
+import ir.maktab.mappers.specialist.SpecialistMapper;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -19,23 +20,25 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final CustomerRepository customerRepository;
     private final SpecialistRepository specialistRepository;
-    private final UserMapper userMapper;
+    private final CustomerMapper customerMapper;
+    private final SpecialistMapper specialistMapper;
 
-    public UserServiceImpl(CustomerRepository customerRepository, SpecialistRepository specialistRepository, UserMapper userMapper) {
+    public UserServiceImpl(CustomerRepository customerRepository, SpecialistRepository specialistRepository, CustomerMapper customerMapper, SpecialistMapper specialistMapper) {
         this.customerRepository = customerRepository;
         this.specialistRepository = specialistRepository;
-        this.userMapper = userMapper;
+        this.customerMapper = customerMapper;
+        this.specialistMapper = specialistMapper;
     }
 
     @Override
-    public Set<UserDto> filterUsers(UserFilterDto userFilterDto) {
-        Set<UserDto> userDtos = new HashSet<>();
-        userDtos.addAll(
-                customerRepository.findAll(UserSpecification.filterCustomers(userFilterDto))
-                        .stream().map(userMapper::toUserDto).collect(Collectors.toList()));
-        userDtos.addAll(
-                specialistRepository.findAll(UserSpecification.filterSpecialists(userFilterDto))
-                        .stream().map(userMapper::toUserDto).collect(Collectors.toList()));
-        return userDtos;
+    public UserFilterResult filterUsers(UserFilterDto userFilterDto) {
+        UserFilterResult result = new UserFilterResult();
+        result.getCustomerDtos().addAll(customerRepository.findAll(Specification.where(CustomerSpecification.filterCustomers(userFilterDto)))
+                .stream().map(customerMapper::toCustomerDto).collect(Collectors.toSet()));
+
+        result.getSpecialistDtos().addAll(specialistRepository.findAll(Specification.where(SpecialistSpecification.filterSpecialists(userFilterDto)))
+                .stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
+
+        return result;
     }
 }
