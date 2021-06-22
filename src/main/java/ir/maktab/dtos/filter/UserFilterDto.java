@@ -11,6 +11,7 @@ public class UserFilterDto {
     private String family;
     private String Email;
     private String speciality;
+    private String score;
 
     public PersonRole getRole() {
         return role;
@@ -54,6 +55,15 @@ public class UserFilterDto {
 
     public UserFilterDto setSpeciality(String speciality) {
         this.speciality = speciality;
+        return this;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public UserFilterDto setScore(String score) {
+        this.score = score;
         return this;
     }
 }
