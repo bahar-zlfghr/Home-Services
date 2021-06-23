@@ -3,7 +3,7 @@ function validateForm() {
 }
 
 function validateService() {
-    console.log("service name: ", serviceName);
+    var serviceName = document.getElementById('serviceName').value;
     if (serviceName.length === 0) {
         document.getElementById('serviceError').innerHTML = 'Choose one service';
         return false;
