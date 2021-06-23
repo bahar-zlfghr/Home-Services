@@ -1,5 +1,6 @@
 package ir.maktab.dtos;
 
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,9 +9,12 @@ import java.util.Set;
  **/
 public class ServiceDto {
     private Integer id;
+
+    @Size(min = 4, max = 30, message = "{service.name.range}")
     private String name;
+
     private Set<SubServiceDto> subServiceDtos = new HashSet<>();
-    private Set<SpecialistDto> specialistDtos;
+    private Set<SpecialistDto> specialistDtos = new HashSet<>();
 
     public Integer getId() {
         return id;
