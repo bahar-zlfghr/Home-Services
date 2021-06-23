@@ -5,6 +5,7 @@ import ir.maktab.data.repository.subservice.SubServiceRepository;
 import ir.maktab.dtos.ServiceDto;
 import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
+import ir.maktab.exceptions.DuplicateSubServiceNameException;
 import ir.maktab.exceptions.NotFoundSubServiceException;
 import ir.maktab.mappers.service.ServiceMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
@@ -33,8 +34,12 @@ public class SubServiceServiceImpl implements SubServiceService {
     }
 
     @Override
-    public void saveSubService(SubServiceDto subServiceDto) {
-        subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
+    public void saveSubService(SubServiceDto subServiceDto) throws DuplicateSubServiceNameException {
+        Optional<SubService> subServiceByName = subServiceRepository.getSubServiceByName(subServiceDto.getName());
+        if (!subServiceByName.isPresent()) {
+            subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
+        }
+        throw new DuplicateSubServiceNameException("sub.service.name.duplicated");
     }
 
     @Override

@@ -3,6 +3,7 @@ package ir.maktab.service.subservice;
 import ir.maktab.dtos.ServiceDto;
 import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
+import ir.maktab.exceptions.DuplicateSubServiceNameException;
 import ir.maktab.exceptions.NotFoundSubServiceException;
 
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
  **/
 public interface SubServiceService {
 
-    void saveSubService(SubServiceDto subServiceDto);
+    void saveSubService(SubServiceDto subServiceDto) throws DuplicateSubServiceNameException;
     void updateSubServiceName(Integer id, String name);
     void updateSubServiceBasePrice(Integer id, Long basePrice);
     void updateSubServiceDescription(Integer id, String description);
