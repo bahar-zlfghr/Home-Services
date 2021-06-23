@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author : Bahar Zolfaghari
@@ -50,5 +52,10 @@ public class ServiceServiceImpl implements ServiceService {
             return serviceMapper.toServiceDto(serviceByName.get());
         }
         throw new NotFoundServiceException("service.not.found");
+    }
+
+    @Override
+    public Set<ServiceDto> getAllService() {
+        return serviceRepository.getAllServices().stream().map(serviceMapper::toServiceDto).collect(Collectors.toSet());
     }
 }
