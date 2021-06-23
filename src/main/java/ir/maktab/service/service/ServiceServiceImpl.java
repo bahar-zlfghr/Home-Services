@@ -2,10 +2,12 @@ package ir.maktab.service.service;
 
 import ir.maktab.data.repository.service.ServiceRepository;
 import ir.maktab.dtos.ServiceDto;
+import ir.maktab.exceptions.DuplicateServiceNameException;
 import ir.maktab.exceptions.NotFoundServiceException;
 import ir.maktab.mappers.service.ServiceMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -22,8 +24,13 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public void saveService(ServiceDto serviceDto) {
-        serviceRepository.save(serviceMapper.toService(serviceDto));
+    @Transactional
+    public void saveService(ServiceDto serviceDto) throws DuplicateServiceNameException {
+        Optional<ir.maktab.data.domain.Service> serviceByName = serviceRepository.getServiceByName(serviceDto.getName());
+        if (!serviceByName.isPresent()) {
+            serviceRepository.save(serviceMapper.toService(serviceDto));
+        }
+        throw new DuplicateServiceNameException("service.name.duplicated");
     }
 
     @Override
