@@ -3,9 +3,12 @@ package ir.maktab.web.manager;
 import ir.maktab.configuration.LastViewInterceptor;
 import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.ServiceDto;
+import ir.maktab.dtos.SubServiceDto;
 import ir.maktab.dtos.filter.UserFilterDto;
 import ir.maktab.dtos.filter.UserFilterResult;
 import ir.maktab.exceptions.DuplicateServiceNameException;
+import ir.maktab.exceptions.DuplicateSubServiceNameException;
+import ir.maktab.exceptions.NotFoundServiceException;
 import ir.maktab.service.manager.ManagerService;
 import ir.maktab.service.service.ServiceService;
 import ir.maktab.service.subservice.SubServiceService;
@@ -81,6 +84,35 @@ public class ManagerController {
         return "/manager/serviceSaveSuccess";
     }
 
+    @GetMapping("/create/subservice")
+    public String createSubServiceForm(Model model) {
+        model.addAttribute("services", serviceService.getAllService());
+
+        return "/manager/createSubService";
+    }
+
+    @PostMapping("/create/subservice")
+    public String createService(@RequestParam(value = "serviceName") String serviceName,
+                                @RequestParam(value = "subServiceName") String subServiceName,
+                                @RequestParam(value = "basePrice") String basePrice,
+                                @RequestParam(value = "description") String description,
+                                Model model) throws DuplicateSubServiceNameException, NotFoundServiceException {
+        ServiceDto serviceDto = serviceService.getServiceByName(serviceName);
+
+        SubServiceDto subServiceDto = new SubServiceDto()
+                .setName(subServiceName)
+                .setBasePrice(Long.valueOf(basePrice))
+                .setDescription(description)
+                .setServiceDto(serviceDto);
+
+        subServiceService.saveSubService(subServiceDto);
+
+        model.addAttribute("service", serviceDto);
+        model.addAttribute("subService", subServiceDto);
+
+        return "/manager/subServiceSaveSuccess";
+    }
+
     @ExceptionHandler(value = BindException.class)
     public ModelAndView bindExceptionHandler(BindException ex, HttpServletRequest request) {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
@@ -88,12 +120,23 @@ public class ManagerController {
     }
 
     @ExceptionHandler(value = DuplicateServiceNameException.class)
-    public ModelAndView DuplicateServiceNameErrorHandler(DuplicateServiceNameException ex, HttpServletRequest request) {
+    public ModelAndView duplicateServiceNameErrorHandler(DuplicateServiceNameException ex, HttpServletRequest request) {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
 
         Map<String, Object> model = new HashMap<>();
         model.put("duplicateServiceName", ex.getMessage());
         model.put("serviceDto", new ServiceDto());
+
+        return new ModelAndView(lastView, model);
+    }
+
+    @ExceptionHandler(value = DuplicateSubServiceNameException.class)
+    public ModelAndView duplicateSubServiceNameErrorHandler(DuplicateSubServiceNameException ex, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("duplicateSubServiceName", ex.getMessage());
+        model.put("subServiceDto", new SubServiceDto());
 
         return new ModelAndView(lastView, model);
     }
