@@ -12,7 +12,7 @@ public class User extends Person {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 

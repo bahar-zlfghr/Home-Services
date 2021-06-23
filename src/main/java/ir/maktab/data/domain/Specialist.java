@@ -14,20 +14,20 @@ public class Specialist extends User {
 
     private Integer score;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "profilePicture_id", foreignKey = @ForeignKey(name = "SPECIALIST_PROFILE_PICTURE_FK"))
     private ProfilePicture profilePicture;
 
-    @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<SubService> subServices = new HashSet<>();
 
-    @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Service> services = new HashSet<>();
 
-    @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true)
+    @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Offer> offers = new HashSet<>();
 
-    @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
     public String getSpecialty() {

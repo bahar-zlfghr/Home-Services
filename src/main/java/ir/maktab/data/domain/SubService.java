@@ -20,11 +20,11 @@ public class SubService {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "service_id", foreignKey = @ForeignKey(name = "SUB_SERVICE_SERVICE_FK"))
     private Service service;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Specialist> specialists;
 
     public Integer getId() {

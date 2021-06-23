@@ -17,7 +17,7 @@ public class ProfilePicture {
     @Basic(fetch = FetchType.LAZY)
     private byte[] data;
 
-    @OneToOne(mappedBy = "profilePicture", cascade = {CascadeType.ALL, CascadeType.PERSIST})
+    @OneToOne(mappedBy = "profilePicture", cascade = {CascadeType.ALL, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Specialist specialist;
 
     public Integer getId() {

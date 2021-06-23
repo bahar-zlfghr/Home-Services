@@ -14,15 +14,15 @@ public class Comment {
     private Integer score;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "COMMENT_CUSTOMER_FK"))
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "specialist_id", foreignKey = @ForeignKey(name = "COMMENT_SPECIALIST_FK"))
     private Specialist specialist;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "COMMENT_ORDER_FK"))
     private Order order;
 

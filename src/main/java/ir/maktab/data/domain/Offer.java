@@ -26,11 +26,11 @@ public class Offer {
     @Temporal(TemporalType.TIME)
     private Date startTime;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "OFFER_ORDER_FK"))
     private Order order;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "specialist_id", foreignKey = @ForeignKey(name = "OFFER_SPECIALIST_FK"))
     private Specialist specialist;
 

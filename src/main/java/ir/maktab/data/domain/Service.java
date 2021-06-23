@@ -16,7 +16,7 @@ public class Service {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "service", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true)
+    @OneToMany(mappedBy = "service", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<SubService> subServices = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
