@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author : Bahar Zolfaghari
@@ -18,4 +19,7 @@ public interface ServiceRepository extends JpaRepository<Service, Integer> {
     void UpdateServiceName(@Param("id") Integer id, @Param("name") String name);
 
     Optional<Service> getServiceByName(String name);
+
+    @Query("FROM Service")
+    Set<Service> getAllServices();
 }
