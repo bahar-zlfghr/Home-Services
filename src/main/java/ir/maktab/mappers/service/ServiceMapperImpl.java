@@ -28,7 +28,6 @@ public class ServiceMapperImpl implements ServiceMapper {
         return new Service()
                 .setId(serviceDto.getId())
                 .setName(serviceDto.getName())
-                .setSubServices(serviceDto.getSubServiceDtos().stream().map(subServiceMapper::toSubService).collect(Collectors.toSet()))
                 .setSpecialists(serviceDto.getSpecialistDtos().stream().map(specialistMapper::toSpecialist).collect(Collectors.toSet()));
     }
 
@@ -37,7 +36,6 @@ public class ServiceMapperImpl implements ServiceMapper {
         return new ServiceDto()
                 .setId(service.getId())
                 .setName(service.getName())
-                .setSubServiceDtos(service.getSubServices().stream().map(subServiceMapper::toSubServiceDto).collect(Collectors.toSet()))
                 .setSpecialistDtos(service.getSpecialists().stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
     }
 }
