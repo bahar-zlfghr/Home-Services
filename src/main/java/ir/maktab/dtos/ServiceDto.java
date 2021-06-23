@@ -13,7 +13,6 @@ public class ServiceDto {
     @Size(min = 4, max = 30, message = "{service.name.range}")
     private String name;
 
-    private Set<SubServiceDto> subServiceDtos = new HashSet<>();
     private Set<SpecialistDto> specialistDtos = new HashSet<>();
 
     public Integer getId() {
@@ -31,15 +30,6 @@ public class ServiceDto {
 
     public ServiceDto setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public Set<SubServiceDto> getSubServiceDtos() {
-        return subServiceDtos;
-    }
-
-    public ServiceDto setSubServiceDtos(Set<SubServiceDto> subServiceDtos) {
-        this.subServiceDtos = subServiceDtos;
         return this;
     }
 

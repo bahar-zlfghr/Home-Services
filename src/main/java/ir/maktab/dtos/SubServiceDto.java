@@ -1,5 +1,6 @@
 package ir.maktab.dtos;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,7 +12,7 @@ public class SubServiceDto {
     private Long basePrice;
     private String description;
     private ServiceDto serviceDto;
-    private Set<SpecialistDto> specialistDtos;
+    private Set<SpecialistDto> specialistDtos = new HashSet<>();
 
     public Integer getId() {
         return id;
