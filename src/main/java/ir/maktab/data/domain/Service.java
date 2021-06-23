@@ -19,7 +19,7 @@ public class Service {
     @OneToMany(mappedBy = "service", cascade = {CascadeType.ALL, CascadeType.PERSIST}, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<SubService> subServices = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Specialist> specialists;
 
     public Integer getId() {

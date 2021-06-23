@@ -20,7 +20,7 @@ public class SubService {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "service_id", foreignKey = @ForeignKey(name = "SUB_SERVICE_SERVICE_FK"))
     private Service service;
 
