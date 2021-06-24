@@ -1,6 +1,7 @@
 package ir.maktab.data.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -25,7 +26,7 @@ public class SubService {
     private Service service;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Specialist> specialists;
+    private Set<Specialist> specialists = new HashSet<>();
 
     public Integer getId() {
         return id;
