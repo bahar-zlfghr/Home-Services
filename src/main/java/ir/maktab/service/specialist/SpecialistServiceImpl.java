@@ -130,4 +130,9 @@ public class SpecialistServiceImpl implements SpecialistService {
             throw new DuplicateEmailException("{email.duplicated}");
         }
     }
+
+    @Override
+    public Set<SpecialistDto> getAllSpecialists() {
+        return specialistRepository.getAllSpecialists().stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet());
+    }
 }

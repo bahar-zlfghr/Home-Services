@@ -26,4 +26,5 @@ public interface SpecialistService {
     SpecialistDto getSpecialistByEmail(String email) throws NotFoundUserException;
     SpecialistDto getSpecialistByEmailAndPassword(String email, String password) throws NotFoundUserException;
     void checkDuplicateEmail(String email) throws DuplicateEmailException;
+    Set<SpecialistDto> getAllSpecialists();
 }
