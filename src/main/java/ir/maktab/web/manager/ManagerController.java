@@ -3,14 +3,14 @@ package ir.maktab.web.manager;
 import ir.maktab.configuration.LastViewInterceptor;
 import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.ServiceDto;
+import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
 import ir.maktab.dtos.filter.UserFilterDto;
 import ir.maktab.dtos.filter.UserFilterResult;
-import ir.maktab.exceptions.DuplicateServiceNameException;
-import ir.maktab.exceptions.DuplicateSubServiceNameException;
-import ir.maktab.exceptions.NotFoundServiceException;
+import ir.maktab.exceptions.*;
 import ir.maktab.service.manager.ManagerService;
 import ir.maktab.service.service.ServiceService;
+import ir.maktab.service.specialist.SpecialistService;
 import ir.maktab.service.subservice.SubServiceService;
 import ir.maktab.service.user.UserService;
 import org.springframework.stereotype.Controller;
@@ -34,12 +34,14 @@ public class ManagerController {
     private final UserService userService;
     private final ServiceService serviceService;
     private final SubServiceService subServiceService;
+    private final SpecialistService specialistService;
 
-    public ManagerController(ManagerService managerService, UserService userService, ServiceService serviceService, SubServiceService subServiceService) {
+    public ManagerController(ManagerService managerService, UserService userService, ServiceService serviceService, SubServiceService subServiceService, SpecialistService specialistService) {
         this.managerService = managerService;
         this.userService = userService;
         this.serviceService = serviceService;
         this.subServiceService = subServiceService;
+        this.specialistService = specialistService;
     }
 
     @GetMapping("/filter")
@@ -85,10 +87,10 @@ public class ManagerController {
     }
 
     @GetMapping("/create/subservice")
-    public String createSubServiceForm(Model model) {
-        model.addAttribute("services", serviceService.getAllService());
+    public ModelAndView createSubServiceForm() {
 
-        return "/manager/createSubService";
+        return new ModelAndView("/manager/createSubService",
+                "services", serviceService.getAllService());
     }
 
     @PostMapping("/create/subservice")
@@ -111,6 +113,35 @@ public class ManagerController {
         model.addAttribute("subService", subServiceDto);
 
         return "/manager/subServiceSaveSuccess";
+    }
+
+    @GetMapping("/add/specialist/subservice")
+    public ModelAndView assignSpecialistToSubServiceForm() {
+        ModelAndView modelAndView = new ModelAndView("/manager/assignSpecialistToSubService");
+
+        modelAndView.getModel().put("subServices", subServiceService.getAllSubServices());
+        modelAndView.getModel().put("specialists", specialistService.getAllSpecialists());
+
+        return modelAndView;
+    }
+
+    @PostMapping("/add/specialist/subservice")
+    public String assignSpecialistToSubServiceForm(@RequestParam(value = "subServiceName") String subServiceName,
+                                                   @RequestParam(value = "specialistEmail") String specialistEmail,
+                                                   Model model) throws NotFoundSubServiceException, NotFoundUserException {
+
+        SubServiceDto subServiceDto = subServiceService.getSubServiceByName(subServiceName);
+        SpecialistDto specialistDto = specialistService.getSpecialistByEmail(specialistEmail);
+
+        specialistDto.getSubServiceDtos().add(subServiceDto);
+        subServiceDto.getSpecialistDtos().add(specialistDto);
+
+        subServiceService.updateSubServiceSpecialists(subServiceDto);
+
+        model.addAttribute("subService", subServiceDto);
+        model.addAttribute("specialist", specialistDto);
+
+        return "/manager/assignSpecialistToSubServiceSuccess";
     }
 
     @ExceptionHandler(value = BindException.class)
