@@ -17,11 +17,12 @@ public interface SubServiceService {
     void updateSubServiceName(Integer id, String name);
     void updateSubServiceBasePrice(Integer id, Long basePrice);
     void updateSubServiceDescription(Integer id, String description);
-    void updateSubServiceSpecialists(Integer id, Set<SpecialistDto> specialistDtos);
+    void updateSubServiceSpecialists(SubServiceDto subServiceDto);
     void deleteSubService(SubServiceDto subServiceDto);
     SubServiceDto getSubServiceByName(String name) throws NotFoundSubServiceException;
     Set<SubServiceDto> getSubServicesByService(ServiceDto serviceDto);
     void assignSpecialistToSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto);
     void editSubServiceSpecialists(SubServiceDto subServiceDto, Set<SpecialistDto> specialistDtos);
     void deleteSpecialistFromSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto);
+    Set<SubServiceDto> getAllSubServices();
 }

@@ -58,8 +58,8 @@ public class SubServiceServiceImpl implements SubServiceService {
     }
 
     @Override
-    public void updateSubServiceSpecialists(Integer id, Set<SpecialistDto> specialistDtos) {
-        subServiceRepository.updateSubServiceSpecialists(id, specialistDtos.stream().map(specialistMapper::toSpecialist).collect(Collectors.toSet()));
+    public void updateSubServiceSpecialists(SubServiceDto subServiceDto) {
+        subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SubServiceServiceImpl implements SubServiceService {
         if (subServiceByName.isPresent()) {
             return subServiceMapper.toSubServiceDto(subServiceByName.get());
         }
-        throw new NotFoundSubServiceException("{sub.service.not.found}");
+        throw new NotFoundSubServiceException("sub.service.not.found");
     }
 
     @Override
@@ -85,17 +85,22 @@ public class SubServiceServiceImpl implements SubServiceService {
     @Override
     public void assignSpecialistToSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto) {
         subServiceDto.getSpecialistDtos().add(specialistDto);
-        updateSubServiceSpecialists(subServiceDto.getId(), subServiceDto.getSpecialistDtos());
+        updateSubServiceSpecialists(subServiceDto);
     }
 
     @Override
     public void editSubServiceSpecialists(SubServiceDto subServiceDto, Set<SpecialistDto> specialistDtos) {
-        updateSubServiceSpecialists(subServiceDto.getId(), specialistDtos);
+        updateSubServiceSpecialists(subServiceDto);
     }
 
     @Override
     public void deleteSpecialistFromSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto) {
         subServiceDto.getSpecialistDtos().remove(specialistDto);
-        updateSubServiceSpecialists(subServiceDto.getId(), subServiceDto.getSpecialistDtos());
+        updateSubServiceSpecialists(subServiceDto);
+    }
+
+    @Override
+    public Set<SubServiceDto> getAllSubServices() {
+        return subServiceRepository.getAllSubServices().stream().map(subServiceMapper::toSubServiceDto).collect(Collectors.toSet());
     }
 }
