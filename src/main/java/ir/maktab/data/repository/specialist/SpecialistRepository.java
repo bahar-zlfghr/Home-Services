@@ -42,4 +42,7 @@ public interface SpecialistRepository extends JpaRepository<Specialist, Integer>
 
     Optional<Specialist> getSpecialistByEmail(String email);
     Optional<Specialist> getSpecialistByEmailAndPassword(String email, String password);
+
+    @Query("FROM Specialist")
+    Set<Specialist> getAllSpecialists();
 }

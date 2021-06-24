@@ -1,7 +1,6 @@
 package ir.maktab.data.repository.subservice;
 
 import ir.maktab.data.domain.Service;
-import ir.maktab.data.domain.Specialist;
 import ir.maktab.data.domain.SubService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,10 +25,10 @@ public interface SubServiceRepository extends JpaRepository<SubService, Integer>
     @Query("UPDATE SubService AS s SET s.description = :description WHERE s.id = :id")
     void updateSubServiceDescription(@Param("id") Integer id, @Param("description") String description);
 
-    @Query("UPDATE SubService AS s SET s.specialists = :specialists WHERE s.id = :id")
-    void updateSubServiceSpecialists(@Param("id") Integer id, @Param("specialists") Set<Specialist> specialists);
-
     Optional<SubService> getSubServiceByName(String name);
 
     Set<SubService> getSubServicesByService(Service service);
+
+    @Query("FROM SubService")
+    Set<SubService> getAllSubServices();
 }
