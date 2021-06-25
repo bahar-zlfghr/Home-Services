@@ -4,6 +4,7 @@ import ir.maktab.data.repository.address.AddressRepository;
 import ir.maktab.dtos.AddressDto;
 import ir.maktab.mappers.address.AddressMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;

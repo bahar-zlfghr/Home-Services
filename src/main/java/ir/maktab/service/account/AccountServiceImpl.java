@@ -6,6 +6,7 @@ import ir.maktab.dtos.AccountDto;
 import ir.maktab.exceptions.NotFoundAccountException;
 import ir.maktab.mappers.account.AccountMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;

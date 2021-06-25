@@ -12,6 +12,7 @@ import ir.maktab.mappers.customer.CustomerMapper;
 import ir.maktab.mappers.order.OrderMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;

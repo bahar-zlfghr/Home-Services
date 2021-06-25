@@ -11,6 +11,7 @@ import ir.maktab.mappers.service.ServiceMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import ir.maktab.mappers.subservice.SubServiceMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class SubServiceServiceImpl implements SubServiceService {
     private final SubServiceRepository subServiceRepository;
     private final SubServiceMapper subServiceMapper;

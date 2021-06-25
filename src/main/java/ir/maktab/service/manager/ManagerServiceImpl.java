@@ -6,6 +6,7 @@ import ir.maktab.dtos.ManagerDto;
 import ir.maktab.exceptions.NotFoundUserException;
 import ir.maktab.mappers.manager.ManagerMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class ManagerServiceImpl implements ManagerService {
     private final ManagerRepository managerRepository;
     private final ManagerMapper managerMapper;

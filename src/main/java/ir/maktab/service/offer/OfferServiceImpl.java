@@ -13,6 +13,7 @@ import ir.maktab.mappers.offer.OfferMapper;
 import ir.maktab.mappers.order.OrderMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class OfferServiceImpl implements OfferService {
     private final OfferRepository offerRepository;
     private final OfferMapper offerMapper;

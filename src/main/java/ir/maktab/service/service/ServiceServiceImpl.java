@@ -6,8 +6,8 @@ import ir.maktab.exceptions.DuplicateServiceNameException;
 import ir.maktab.exceptions.NotFoundServiceException;
 import ir.maktab.mappers.service.ServiceMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class ServiceServiceImpl implements ServiceService {
     private final ServiceRepository serviceRepository;
     private final ServiceMapper serviceMapper;
@@ -26,7 +27,6 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    @Transactional
     public void saveService(ServiceDto serviceDto) throws DuplicateServiceNameException {
         Optional<ir.maktab.data.domain.Service> serviceByName = serviceRepository.getServiceByName(serviceDto.getName());
         if (!serviceByName.isPresent()) {

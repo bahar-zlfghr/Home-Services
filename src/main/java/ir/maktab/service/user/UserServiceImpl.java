@@ -10,6 +10,7 @@ import ir.maktab.mappers.customer.CustomerMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
  * @author : Bahar Zolfaghari
  **/
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private final CustomerRepository customerRepository;
     private final SpecialistRepository specialistRepository;
