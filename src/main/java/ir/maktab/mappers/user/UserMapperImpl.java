@@ -1,7 +1,6 @@
 package ir.maktab.mappers.user;
 
 import ir.maktab.data.domain.User;
-import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.UserDto;
 import ir.maktab.mappers.account.AccountMapper;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,7 @@ public class UserMapperImpl implements UserMapper {
                 .setFamily(userDto.getFamily())
                 .setEmail(userDto.getEmail())
                 .setPassword(userDto.getPassword())
-                .setRole(PersonRole.valueOf(userDto.getRole().toUpperCase()));
+                .setRole(userDto.getRole());
     }
 
     @Override
@@ -40,6 +39,6 @@ public class UserMapperImpl implements UserMapper {
                 .setFamily(user.getFamily())
                 .setEmail(user.getEmail())
                 .setPassword(user.getPassword())
-                .setRole(user.getRole().getRole());
+                .setRole(user.getRole());
     }
 }

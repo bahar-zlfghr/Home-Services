@@ -1,10 +1,8 @@
 package ir.maktab.mappers.specialist;
 
 import ir.maktab.data.domain.Specialist;
-import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.mappers.account.AccountMapper;
-import ir.maktab.mappers.profilepicture.ProfilePictureMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -13,21 +11,18 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class SpecialistMapperImpl implements SpecialistMapper {
-    private final ProfilePictureMapper profilePictureMapper;
     private final AccountMapper accountMapper;
 
     @Lazy
-    public SpecialistMapperImpl(ProfilePictureMapper profilePictureMapper, AccountMapper accountMapper) {
-        this.profilePictureMapper = profilePictureMapper;
+    public SpecialistMapperImpl(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
     }
 
     @Override
     public Specialist toSpecialist(SpecialistDto specialistDto) {
         return (Specialist) new Specialist()
-                .setSpecialty(specialistDto.getSpecialty())
                 .setScore(specialistDto.getScore())
-                .setProfilePicture(profilePictureMapper.toProfilePicture(specialistDto.getProfilePictureDto()))
+                .setProfilePicture(specialistDto.getProfilePicture())
                 .setStatus(specialistDto.getStatus())
                 .setAccount(accountMapper.toAccount(specialistDto.getAccountDto()))
                 .setId(specialistDto.getId())
@@ -35,15 +30,14 @@ public class SpecialistMapperImpl implements SpecialistMapper {
                 .setFamily(specialistDto.getFamily())
                 .setEmail(specialistDto.getEmail())
                 .setPassword(specialistDto.getPassword())
-                .setRole(PersonRole.valueOf(specialistDto.getRole().toUpperCase()));
+                .setRole(specialistDto.getRole());
     }
 
     @Override
     public SpecialistDto toSpecialistDto(Specialist specialist) {
         return (SpecialistDto) new SpecialistDto()
-                .setSpecialty(specialist.getSpecialty())
                 .setScore(specialist.getScore())
-                .setProfilePictureDto(profilePictureMapper.toProfilePictureDto(specialist.getProfilePicture()))
+                .setProfilePicture(specialist.getProfilePicture())
                 .setStatus(specialist.getStatus())
                 .setAccountDto(accountMapper.toAccountDto(specialist.getAccount()))
                 .setId(specialist.getId())
@@ -51,6 +45,6 @@ public class SpecialistMapperImpl implements SpecialistMapper {
                 .setFamily(specialist.getFamily())
                 .setEmail(specialist.getEmail())
                 .setPassword(specialist.getPassword())
-                .setRole(specialist.getRole().getRole());
+                .setRole(specialist.getRole());
     }
 }

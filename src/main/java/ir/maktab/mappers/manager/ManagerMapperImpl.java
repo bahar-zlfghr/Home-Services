@@ -1,7 +1,6 @@
 package ir.maktab.mappers.manager;
 
 import ir.maktab.data.domain.Manager;
-import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.ManagerDto;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ public class ManagerMapperImpl implements ManagerMapper {
                 .setFamily(managerDto.getFamily())
                 .setEmail(managerDto.getEmail())
                 .setPassword(managerDto.getPassword())
-                .setRole(PersonRole.valueOf(managerDto.getRole().toUpperCase()));
+                .setRole(managerDto.getRole());
     }
 
     @Override
@@ -30,6 +29,6 @@ public class ManagerMapperImpl implements ManagerMapper {
                 .setFamily(manager.getFamily())
                 .setEmail(manager.getEmail())
                 .setPassword(manager.getPassword())
-                .setRole(manager.getRole().getRole());
+                .setRole(manager.getRole());
     }
 }

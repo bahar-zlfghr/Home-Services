@@ -1,7 +1,6 @@
 package ir.maktab.mappers.customer;
 
 import ir.maktab.data.domain.Customer;
-import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.CustomerDto;
 import ir.maktab.mappers.account.AccountMapper;
 import ir.maktab.mappers.order.OrderMapper;
@@ -35,7 +34,7 @@ public class CustomerMapperImpl implements CustomerMapper {
                 .setFamily(customerDto.getFamily())
                 .setEmail(customerDto.getEmail())
                 .setPassword(customerDto.getPassword())
-                .setRole(PersonRole.valueOf(customerDto.getRole().toUpperCase()));
+                .setRole(customerDto.getRole());
     }
 
     @Override
@@ -49,6 +48,6 @@ public class CustomerMapperImpl implements CustomerMapper {
                 .setFamily(customer.getFamily())
                 .setEmail(customer.getEmail())
                 .setPassword(customer.getPassword())
-                .setRole(customer.getRole().getRole());
+                .setRole(customer.getRole());
     }
 }
