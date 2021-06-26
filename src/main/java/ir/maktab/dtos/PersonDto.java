@@ -1,5 +1,7 @@
 package ir.maktab.dtos;
 
+import ir.maktab.data.enums.PersonRole;
+import ir.maktab.validationgroup.LoginGroup;
 import ir.maktab.validationgroup.RegistrationGroup;
 import ir.maktab.validators.Password;
 
@@ -19,15 +21,15 @@ public class PersonDto {
     @Size(min = 3, max = 30, message = "{user.family.range}", groups = {RegistrationGroup.class})
     private String family;
 
-    @NotBlank(message = "{user.email.valid}", groups = {RegistrationGroup.class})
-    @Email(message = "{user.email.valid}", groups = {RegistrationGroup.class})
+    @NotBlank(message = "{user.email.required}", groups = {RegistrationGroup.class, LoginGroup.class})
+    @Email(message = "{user.email.valid}", groups = {RegistrationGroup.class, LoginGroup.class})
     private String email;
 
     @Password(groups = {RegistrationGroup.class})
+    @NotBlank(message = "{user.password.required}", groups = {LoginGroup.class})
     private String password;
 
-    @NotBlank(message = "{user.role.required}", groups = {RegistrationGroup.class})
-    private String role;
+    private PersonRole role;
 
     public Integer getId() {
         return id;
@@ -74,11 +76,11 @@ public class PersonDto {
         return this;
     }
 
-    public String getRole() {
+    public PersonRole getRole() {
         return role;
     }
 
-    public PersonDto setRole(String role) {
+    public PersonDto setRole(PersonRole role) {
         this.role = role;
         return this;
     }

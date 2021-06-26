@@ -7,22 +7,12 @@ import java.util.Set;
  * @author : Bahar Zolfaghari
  **/
 public class SpecialistDto extends UserDto {
-    private String specialty;
     private Integer score;
-    private ProfilePictureDto profilePictureDto;
+    private byte[] profilePicture;
     private Set<SubServiceDto> subServiceDtos = new HashSet<>();
     private Set<ServiceDto> serviceDtos = new HashSet<>();
     private Set<OfferDto> offerDtos = new HashSet<>();
     private Set<OrderDto> orderDtos = new HashSet<>();
-
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public SpecialistDto setSpecialty(String specialty) {
-        this.specialty = specialty;
-        return this;
-    }
 
     public Integer getScore() {
         return score;
@@ -33,12 +23,12 @@ public class SpecialistDto extends UserDto {
         return this;
     }
 
-    public ProfilePictureDto getProfilePictureDto() {
-        return profilePictureDto;
+    public byte[] getProfilePicture() {
+        return profilePicture;
     }
 
-    public SpecialistDto setProfilePictureDto(ProfilePictureDto profilePictureDto) {
-        this.profilePictureDto = profilePictureDto;
+    public SpecialistDto setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
         return this;
     }
 
