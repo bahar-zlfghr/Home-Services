@@ -5,6 +5,7 @@ import ir.maktab.dtos.ServiceDto;
 import ir.maktab.exceptions.DuplicateServiceNameException;
 import ir.maktab.exceptions.NotFoundServiceException;
 import ir.maktab.mappers.service.ServiceMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +21,12 @@ import java.util.stream.Collectors;
 public class ServiceServiceImpl implements ServiceService {
     private final ServiceRepository serviceRepository;
     private final ServiceMapper serviceMapper;
+    private final Environment environment;
 
-    public ServiceServiceImpl(ServiceRepository serviceRepository, ServiceMapper serviceMapper) {
+    public ServiceServiceImpl(ServiceRepository serviceRepository, ServiceMapper serviceMapper, Environment environment) {
         this.serviceRepository = serviceRepository;
         this.serviceMapper = serviceMapper;
+        this.environment = environment;
     }
 
     @Override
@@ -32,7 +35,9 @@ public class ServiceServiceImpl implements ServiceService {
         if (!serviceByName.isPresent()) {
             serviceRepository.save(serviceMapper.toService(serviceDto));
         }
-        throw new DuplicateServiceNameException("service.name.duplicated");
+        else {
+            throw new DuplicateServiceNameException(environment.getProperty("service.name.duplicated"));
+        }
     }
 
     @Override
@@ -51,7 +56,7 @@ public class ServiceServiceImpl implements ServiceService {
         if (serviceByName.isPresent()) {
             return serviceMapper.toServiceDto(serviceByName.get());
         }
-        throw new NotFoundServiceException("service.not.found");
+        throw new NotFoundServiceException(environment.getProperty("service.not.found"));
     }
 
     @Override
