@@ -10,6 +10,7 @@ import ir.maktab.exceptions.NotFoundSubServiceException;
 import ir.maktab.mappers.service.ServiceMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import ir.maktab.mappers.subservice.SubServiceMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,12 +28,14 @@ public class SubServiceServiceImpl implements SubServiceService {
     private final SubServiceMapper subServiceMapper;
     private final ServiceMapper serviceMapper;
     private final SpecialistMapper specialistMapper;
+    private final Environment environment;
 
-    public SubServiceServiceImpl(SubServiceRepository subServiceRepository, SubServiceMapper subServiceMapper, ServiceMapper serviceMapper, SpecialistMapper specialistMapper) {
+    public SubServiceServiceImpl(SubServiceRepository subServiceRepository, SubServiceMapper subServiceMapper, ServiceMapper serviceMapper, SpecialistMapper specialistMapper, Environment environment) {
         this.subServiceRepository = subServiceRepository;
         this.subServiceMapper = subServiceMapper;
         this.serviceMapper = serviceMapper;
         this.specialistMapper = specialistMapper;
+        this.environment = environment;
     }
 
     @Override
@@ -41,7 +44,9 @@ public class SubServiceServiceImpl implements SubServiceService {
         if (!subServiceByName.isPresent()) {
             subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
         }
-        throw new DuplicateSubServiceNameException("sub.service.name.duplicated");
+        else {
+            throw new DuplicateSubServiceNameException(environment.getProperty("sub.service.name.duplicated"));
+        }
     }
 
     @Override
@@ -75,7 +80,7 @@ public class SubServiceServiceImpl implements SubServiceService {
         if (subServiceByName.isPresent()) {
             return subServiceMapper.toSubServiceDto(subServiceByName.get());
         }
-        throw new NotFoundSubServiceException("sub.service.not.found");
+        throw new NotFoundSubServiceException(environment.getProperty("sub.service.not.found"));
     }
 
     @Override
