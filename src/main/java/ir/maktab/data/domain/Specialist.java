@@ -9,14 +9,11 @@ import java.util.Set;
  **/
 @Entity
 public class Specialist extends User {
-    @Column(nullable = false)
-    private String specialty;
-
     private Integer score;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "profilePicture_id", foreignKey = @ForeignKey(name = "SPECIALIST_PROFILE_PICTURE_FK"))
-    private ProfilePicture profilePicture;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] profilePicture;
 
     @ManyToMany(mappedBy = "specialists", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<SubService> subServices = new HashSet<>();
@@ -30,15 +27,6 @@ public class Specialist extends User {
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public Specialist setSpecialty(String specialty) {
-        this.specialty = specialty;
-        return this;
-    }
-
     public Integer getScore() {
         return score;
     }
@@ -48,11 +36,11 @@ public class Specialist extends User {
         return this;
     }
 
-    public ProfilePicture getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public Specialist setProfilePicture(ProfilePicture profilePicture) {
+    public Specialist setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
         return this;
     }
