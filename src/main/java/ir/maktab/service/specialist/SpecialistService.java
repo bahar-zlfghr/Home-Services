@@ -2,8 +2,7 @@ package ir.maktab.service.specialist;
 
 import ir.maktab.dtos.*;
 import ir.maktab.exceptions.DuplicateEmailException;
-import ir.maktab.exceptions.NotEmptyProfilePictureException;
-import ir.maktab.exceptions.NotEmptySpecialtyException;
+import ir.maktab.exceptions.NotEmptyException;
 import ir.maktab.exceptions.NotFoundUserException;
 
 import java.util.Set;
@@ -13,10 +12,9 @@ import java.util.Set;
  **/
 public interface SpecialistService {
 
-    void saveSpecialist(SpecialistDto specialistDto) throws NotEmptySpecialtyException, NotEmptyProfilePictureException;
-    void updateSpecialistSpecialty(Integer id, String specialty);
+    void saveSpecialist(SpecialistDto specialistDto) throws NotEmptyException;
     void updateSpecialistScore(Integer id, Integer score);
-    void updateSpecialistProfilePicture(Integer id, ProfilePictureDto profilePictureDto);
+    void updateSpecialistProfilePicture(Integer id, byte[] profilePicture);
     void updateSpecialistSubServices(Integer id, Set<SubServiceDto> subServiceDtos);
     void updateSpecialistServices(Integer id, Set<ServiceDto> serviceDtos);
     void updateSpecialistOffers(Integer id, Set<OfferDto> offerDtos);

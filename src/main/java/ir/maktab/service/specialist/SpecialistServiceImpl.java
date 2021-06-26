@@ -4,15 +4,14 @@ import ir.maktab.data.domain.Specialist;
 import ir.maktab.data.repository.specialist.SpecialistRepository;
 import ir.maktab.dtos.*;
 import ir.maktab.exceptions.DuplicateEmailException;
-import ir.maktab.exceptions.NotEmptyProfilePictureException;
-import ir.maktab.exceptions.NotEmptySpecialtyException;
+import ir.maktab.exceptions.NotEmptyException;
 import ir.maktab.exceptions.NotFoundUserException;
 import ir.maktab.mappers.offer.OfferMapper;
 import ir.maktab.mappers.order.OrderMapper;
-import ir.maktab.mappers.profilepicture.ProfilePictureMapper;
 import ir.maktab.mappers.service.ServiceMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
 import ir.maktab.mappers.subservice.SubServiceMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,42 +28,32 @@ import java.util.stream.Collectors;
 public class SpecialistServiceImpl implements SpecialistService {
     private final SpecialistRepository specialistRepository;
     private final SpecialistMapper specialistMapper;
-    private final ProfilePictureMapper profilePictureMapper;
     private final SubServiceMapper subServiceMapper;
     private final ServiceMapper serviceMapper;
     private final OfferMapper offerMapper;
     private final OrderMapper orderMapper;
     private final PasswordEncoder passwordEncoder;
+    private final Environment environment;
 
-    public SpecialistServiceImpl(SpecialistRepository specialistRepository, SpecialistMapper specialistMapper, ProfilePictureMapper profilePictureMapper, SubServiceMapper subServiceMapper, ServiceMapper serviceMapper, OfferMapper offerMapper, OrderMapper orderMapper, PasswordEncoder passwordEncoder) {
+    public SpecialistServiceImpl(SpecialistRepository specialistRepository, SpecialistMapper specialistMapper, SubServiceMapper subServiceMapper, ServiceMapper serviceMapper, OfferMapper offerMapper, OrderMapper orderMapper, PasswordEncoder passwordEncoder, Environment environment) {
         this.specialistRepository = specialistRepository;
         this.specialistMapper = specialistMapper;
-        this.profilePictureMapper = profilePictureMapper;
         this.subServiceMapper = subServiceMapper;
         this.serviceMapper = serviceMapper;
         this.offerMapper = offerMapper;
         this.orderMapper = orderMapper;
         this.passwordEncoder = passwordEncoder;
+        this.environment = environment;
     }
 
     @Override
-    public void saveSpecialist(SpecialistDto specialistDto) throws NotEmptySpecialtyException, NotEmptyProfilePictureException {
-        if (specialistDto.getSpecialty().equals("") || specialistDto.getSpecialty() == null) {
-            throw new NotEmptySpecialtyException("{specialist.specialty.not.empty}");
+    public void saveSpecialist(SpecialistDto specialistDto) throws NotEmptyException {
+        if (specialistDto.getProfilePicture().length == 0) {
+            throw new NotEmptyException(environment.getProperty("specialist.profile.picture.not.empty"));
         }
-        if (specialistDto.getProfilePictureDto().getData().length == 0) {
-            throw new NotEmptyProfilePictureException("{specialist.profile.picture.not.empty}");
-        }
-
         String password = specialistDto.getPassword();
         specialistDto.setPassword(passwordEncoder.encode(password));
-
         specialistRepository.save(specialistMapper.toSpecialist(specialistDto));
-    }
-
-    @Override
-    public void updateSpecialistSpecialty(Integer id, String specialty) {
-        specialistRepository.updateSpecialistSpecialty(id, specialty);
     }
 
     @Override
@@ -73,8 +62,8 @@ public class SpecialistServiceImpl implements SpecialistService {
     }
 
     @Override
-    public void updateSpecialistProfilePicture(Integer id, ProfilePictureDto profilePictureDto) {
-        specialistRepository.updateSpecialistProfilePicture(id, profilePictureMapper.toProfilePicture(profilePictureDto));
+    public void updateSpecialistProfilePicture(Integer id, byte[] profilePicture) {
+        specialistRepository.updateSpecialistProfilePicture(id, profilePicture);
     }
 
     @Override
@@ -113,7 +102,7 @@ public class SpecialistServiceImpl implements SpecialistService {
         if (specialistByEmail.isPresent()) {
             return specialistMapper.toSpecialistDto(specialistByEmail.get());
         }
-        throw new NotFoundUserException("{specialist.not.found}");
+        throw new NotFoundUserException(environment.getProperty("specialist.not.found"));
     }
 
     @Override
@@ -122,14 +111,14 @@ public class SpecialistServiceImpl implements SpecialistService {
         if (specialistByEmailAndPassword.isPresent()) {
             return specialistMapper.toSpecialistDto(specialistByEmailAndPassword.get());
         }
-        throw new NotFoundUserException("{user.not.login}");
+        throw new NotFoundUserException(environment.getProperty("user.not.login"));
     }
 
     @Override
     public void checkDuplicateEmail(String email) throws DuplicateEmailException {
         Optional<Specialist> specialistByEmail = specialistRepository.getSpecialistByEmail(email);
         if (specialistByEmail.isPresent()) {
-            throw new DuplicateEmailException("{email.duplicated}");
+            throw new DuplicateEmailException(environment.getProperty("email.duplicated"));
         }
     }
 
