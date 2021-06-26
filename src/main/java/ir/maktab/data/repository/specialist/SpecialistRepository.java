@@ -16,14 +16,11 @@ import java.util.Set;
 @Repository
 public interface SpecialistRepository extends JpaRepository<Specialist, Integer>, JpaSpecificationExecutor<Specialist> {
 
-    @Query("UPDATE Specialist AS s SET s.specialty = :specialty WHERE s.id = :id")
-    void updateSpecialistSpecialty(@Param("id") Integer id, @Param("specialty") String specialty);
-
     @Query("UPDATE Specialist AS s SET s.score = :score WHERE s.id = :id")
     void updateSpecialistScore(@Param("id") Integer id, @Param("score") Integer score);
 
     @Query("UPDATE Specialist AS s SET s.profilePicture = :profilePicture WHERE s.id = :id")
-    void updateSpecialistProfilePicture(@Param("id") Integer id, @Param("profilePicture") ProfilePicture profilePicture);
+    void updateSpecialistProfilePicture(@Param("id") Integer id, @Param("profilePicture") byte[] profilePicture);
 
     @Query("UPDATE Specialist AS s SET s.subServices = :subServices WHERE s.id = :id")
     void updateSpecialistSubServices(@Param("id") Integer id, @Param("subServices") Set<SubService> subServices);
