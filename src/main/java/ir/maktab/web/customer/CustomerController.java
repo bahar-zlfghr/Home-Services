@@ -6,7 +6,9 @@ import ir.maktab.data.enums.UserStatus;
 import ir.maktab.dtos.*;
 import ir.maktab.dtos.factory.AccountFactory;
 import ir.maktab.exceptions.DuplicateEmailException;
+import ir.maktab.exceptions.NotFoundUserException;
 import ir.maktab.service.customer.CustomerService;
+import ir.maktab.validationgroup.LoginGroup;
 import ir.maktab.validationgroup.RegistrationGroup;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +53,35 @@ public class CustomerController {
         return "/customer/registerSuccess";
     }
 
+    @GetMapping("/login")
+    public ModelAndView loginForm() {
+        return new ModelAndView(
+                "/customer/login",
+                "customerDto", new CustomerDto());
+    }
+
+    @PostMapping("/login")
+    public String loginCustomer(@ModelAttribute("customerDto") @Validated(LoginGroup.class) CustomerDto customerDto,
+                                Model model) throws NotFoundUserException {
+        CustomerDto customerByEmailAndPassword = customerService.getCustomerByEmailAndPassword(customerDto.getEmail(), customerDto.getPassword());
+        model.addAttribute("customerDto", customerByEmailAndPassword);
+        return "/customer/panel";
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logoutButton() {
+        ModelAndView modelAndView = new ModelAndView(
+                "/customer/login",
+                "customerDto", new CustomerDto());
+        modelAndView.addObject("logout", true);
+        return modelAndView;
+    }
+
+    @GetMapping("/panel")
+    public String customerPanel() {
+        return "/customer/panel";
+    }
+
     @ExceptionHandler(value = BindException.class)
     public ModelAndView bindExceptionHandler(BindException ex, HttpServletRequest request) {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
@@ -62,6 +93,15 @@ public class CustomerController {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
         Map<String, Object> model = new HashMap<>();
         model.put("duplicateEmailError", ex.getMessage());
+        model.put("customerDto", new CustomerDto());
+        return new ModelAndView(lastView, model);
+    }
+
+    @ExceptionHandler(value = NotFoundUserException.class)
+    public ModelAndView notFoundUserExceptionHandler(NotFoundUserException ex, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
+        Map<String, Object> model = new HashMap<>();
+        model.put("errorLogin", ex.getMessage());
         model.put("customerDto", new CustomerDto());
         return new ModelAndView(lastView, model);
     }
