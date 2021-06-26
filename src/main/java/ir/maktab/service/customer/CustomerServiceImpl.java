@@ -9,6 +9,7 @@ import ir.maktab.exceptions.DuplicateEmailException;
 import ir.maktab.exceptions.NotFoundUserException;
 import ir.maktab.mappers.customer.CustomerMapper;
 import ir.maktab.mappers.order.OrderMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,19 +28,20 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper;
     private final OrderMapper orderMapper;
     private final PasswordEncoder passwordEncoder;
+    private final Environment environment;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerMapper customerMapper, OrderMapper orderMapper, PasswordEncoder passwordEncoder) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerMapper customerMapper, OrderMapper orderMapper, PasswordEncoder passwordEncoder, Environment environment) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
         this.orderMapper = orderMapper;
         this.passwordEncoder = passwordEncoder;
+        this.environment = environment;
     }
 
     @Override
     public void saveCustomer(CustomerDto customerDto) {
         String password = customerDto.getPassword();
         customerDto.setPassword(passwordEncoder.encode(password));
-
         customerRepository.save(customerMapper.toCustomer(customerDto));
     }
 
@@ -69,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerByEmail.isPresent()) {
             return customerMapper.toCustomerDto(customerByEmail.get());
         }
-        throw new NotFoundUserException("{customer.not.found}");
+        throw new NotFoundUserException(environment.getRequiredProperty("customer.not.found"));
     }
 
     @Override
@@ -78,14 +80,14 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerByEmailAndPassword.isPresent()) {
             return customerMapper.toCustomerDto(customerByEmailAndPassword.get());
         }
-        throw new NotFoundUserException("{user.not.login}");
+        throw new NotFoundUserException(environment.getRequiredProperty("user.not.login"));
     }
 
     @Override
     public void checkDuplicateEmail(String email) throws DuplicateEmailException {
         Optional<Customer> customerByEmail = customerRepository.getCustomerByEmail(email);
         if (customerByEmail.isPresent()) {
-            throw new DuplicateEmailException("{email.duplicated}");
+            throw new DuplicateEmailException(environment.getProperty("email.duplicated"));
         }
     }
 }
