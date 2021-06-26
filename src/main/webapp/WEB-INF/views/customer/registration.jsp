@@ -11,10 +11,10 @@
 </head>
 <body>
 
-<form:form  cssClass="p-3 m-3"
-            method="post"
-            action="/customer/registration"
-            modelAttribute="customerDto">
+<form:form method='POST'
+           action="/customer/registration"
+           modelAttribute="customerDto"
+           cssClass="p-3 m-3">
     <table class="table">
         <tr>
             <td><form:label path="name"> Name </form:label></td>
