@@ -23,27 +23,33 @@ public class OfferMapperImpl implements OfferMapper {
 
     @Override
     public Offer toOffer(OfferDto offerDto) {
-        return new Offer()
-                .setId(offerDto.getId())
-                .setSubmitDate(offerDto.getSubmitDate())
-                .setSuggestedPrice(offerDto.getSuggestedPrice())
-                .setDurationDoWork(offerDto.getDurationDoWork())
-                .setStartTime(offerDto.getStartTime())
-                .setOrder(orderMapper.toOrder(offerDto.getOrderDto()))
-                .setSpecialist(specialistMapper.toSpecialist(offerDto.getSpecialistDto()))
-                .setStatus(offerDto.getStatus());
+        if (offerDto != null) {
+            return new Offer()
+                    .setId(offerDto.getId())
+                    .setSubmitDate(offerDto.getSubmitDate())
+                    .setSuggestedPrice(offerDto.getSuggestedPrice())
+                    .setDurationDoWork(offerDto.getDurationDoWork())
+                    .setStartTime(offerDto.getStartTime())
+                    .setOrder(orderMapper.toOrder(offerDto.getOrderDto()))
+                    .setSpecialist(specialistMapper.toSpecialist(offerDto.getSpecialistDto()))
+                    .setStatus(offerDto.getStatus());
+        }
+        return null;
     }
 
     @Override
     public OfferDto toOfferDto(Offer offer) {
-        return new OfferDto()
-                .setId(offer.getId())
-                .setSubmitDate(offer.getSubmitDate())
-                .setSuggestedPrice(offer.getSuggestedPrice())
-                .setDurationDoWork(offer.getDurationDoWork())
-                .setStartTime(offer.getStartTime())
-                .setOrderDto(orderMapper.toOrderDto(offer.getOrder()))
-                .setSpecialistDto(specialistMapper.toSpecialistDto(offer.getSpecialist()))
-                .setStatus(offer.getStatus());
+        if (offer != null) {
+            return new OfferDto()
+                    .setId(offer.getId())
+                    .setSubmitDate(offer.getSubmitDate())
+                    .setSuggestedPrice(offer.getSuggestedPrice())
+                    .setDurationDoWork(offer.getDurationDoWork())
+                    .setStartTime(offer.getStartTime())
+                    .setOrderDto(orderMapper.toOrderDto(offer.getOrder()))
+                    .setSpecialistDto(specialistMapper.toSpecialistDto(offer.getSpecialist()))
+                    .setStatus(offer.getStatus());
+        }
+        return null;
     }
 }

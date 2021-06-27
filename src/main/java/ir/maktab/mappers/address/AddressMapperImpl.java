@@ -12,19 +12,25 @@ public class AddressMapperImpl implements AddressMapper {
 
     @Override
     public Address toAddress(AddressDto addressDto) {
-        return new Address()
-                .setId(addressDto.getId())
-                .setCity(addressDto.getCity())
-                .setState(addressDto.getState())
-                .setFormatted_address(addressDto.getFormatted_address());
+        if (addressDto != null) {
+            return new Address()
+                    .setId(addressDto.getId())
+                    .setCity(addressDto.getCity())
+                    .setState(addressDto.getState())
+                    .setFormattedAddress(addressDto.getFormattedAddress());
+        }
+        return null;
     }
 
     @Override
     public AddressDto toAddressDto(Address address) {
-        return new AddressDto()
-                .setId(address.getId())
-                .setCity(address.getCity())
-                .setState(address.getState())
-                .setFormatted_address(address.getFormatted_address());
+        if (address != null) {
+            return new AddressDto()
+                    .setId(address.getId())
+                    .setCity(address.getCity())
+                    .setState(address.getState())
+                    .setFormattedAddress(address.getFormattedAddress());
+        }
+        return null;
     }
 }

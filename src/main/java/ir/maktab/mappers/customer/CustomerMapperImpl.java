@@ -25,29 +25,35 @@ public class CustomerMapperImpl implements CustomerMapper {
 
     @Override
     public Customer toCustomer(CustomerDto customerDto) {
-        return (Customer) new Customer()
-                .setOrders(customerDto.getOrderDtos().stream().map(orderMapper::toOrder).collect(Collectors.toSet()))
-                .setStatus(customerDto.getStatus())
-                .setAccount(accountMapper.toAccount(customerDto.getAccountDto()))
-                .setId(customerDto.getId())
-                .setName(customerDto.getName())
-                .setFamily(customerDto.getFamily())
-                .setEmail(customerDto.getEmail())
-                .setPassword(customerDto.getPassword())
-                .setRole(customerDto.getRole());
+        if (customerDto != null) {
+            return (Customer) new Customer()
+                    .setOrders(customerDto.getOrderDtos().stream().map(orderMapper::toOrder).collect(Collectors.toSet()))
+                    .setStatus(customerDto.getStatus())
+                    .setAccount(accountMapper.toAccount(customerDto.getAccountDto()))
+                    .setId(customerDto.getId())
+                    .setName(customerDto.getName())
+                    .setFamily(customerDto.getFamily())
+                    .setEmail(customerDto.getEmail())
+                    .setPassword(customerDto.getPassword())
+                    .setRole(customerDto.getRole());
+        }
+        return null;
     }
 
     @Override
     public CustomerDto toCustomerDto(Customer customer) {
-        return (CustomerDto) new CustomerDto()
-                .setOrderDtos(customer.getOrders().stream().map(orderMapper::toOrderDto).collect(Collectors.toSet()))
-                .setStatus(customer.getStatus())
-                .setAccountDto(accountMapper.toAccountDto(customer.getAccount()))
-                .setId(customer.getId())
-                .setName(customer.getName())
-                .setFamily(customer.getFamily())
-                .setEmail(customer.getEmail())
-                .setPassword(customer.getPassword())
-                .setRole(customer.getRole());
+        if (customer != null) {
+            return (CustomerDto) new CustomerDto()
+                    .setOrderDtos(customer.getOrders().stream().map(orderMapper::toOrderDto).collect(Collectors.toSet()))
+                    .setStatus(customer.getStatus())
+                    .setAccountDto(accountMapper.toAccountDto(customer.getAccount()))
+                    .setId(customer.getId())
+                    .setName(customer.getName())
+                    .setFamily(customer.getFamily())
+                    .setEmail(customer.getEmail())
+                    .setPassword(customer.getPassword())
+                    .setRole(customer.getRole());
+        }
+        return null;
     }
 }

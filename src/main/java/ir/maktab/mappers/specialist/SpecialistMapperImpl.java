@@ -20,21 +20,25 @@ public class SpecialistMapperImpl implements SpecialistMapper {
 
     @Override
     public Specialist toSpecialist(SpecialistDto specialistDto) {
-        return (Specialist) new Specialist()
-                .setScore(specialistDto.getScore())
-                .setProfilePicture(specialistDto.getProfilePicture())
-                .setStatus(specialistDto.getStatus())
-                .setAccount(accountMapper.toAccount(specialistDto.getAccountDto()))
-                .setId(specialistDto.getId())
-                .setName(specialistDto.getName())
-                .setFamily(specialistDto.getFamily())
-                .setEmail(specialistDto.getEmail())
-                .setPassword(specialistDto.getPassword())
-                .setRole(specialistDto.getRole());
+        if (specialistDto != null) {
+            return (Specialist) new Specialist()
+                    .setScore(specialistDto.getScore())
+                    .setProfilePicture(specialistDto.getProfilePicture())
+                    .setStatus(specialistDto.getStatus())
+                    .setAccount(accountMapper.toAccount(specialistDto.getAccountDto()))
+                    .setId(specialistDto.getId())
+                    .setName(specialistDto.getName())
+                    .setFamily(specialistDto.getFamily())
+                    .setEmail(specialistDto.getEmail())
+                    .setPassword(specialistDto.getPassword())
+                    .setRole(specialistDto.getRole());
+        }
+        return null;
     }
 
     @Override
     public SpecialistDto toSpecialistDto(Specialist specialist) {
+        if (specialist != null) {
         return (SpecialistDto) new SpecialistDto()
                 .setScore(specialist.getScore())
                 .setProfilePicture(specialist.getProfilePicture())
@@ -46,5 +50,9 @@ public class SpecialistMapperImpl implements SpecialistMapper {
                 .setEmail(specialist.getEmail())
                 .setPassword(specialist.getPassword())
                 .setRole(specialist.getRole());
+        }
+        else {
+            return null;
+        }
     }
 }

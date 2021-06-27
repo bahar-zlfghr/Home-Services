@@ -18,27 +18,33 @@ public class UserMapperImpl implements UserMapper {
 
     @Override
     public User toUser(UserDto userDto) {
-        return (User) new User()
-                .setStatus(userDto.getStatus())
-                .setAccount(accountMapper.toAccount(userDto.getAccountDto()))
-                .setId(userDto.getId())
-                .setName(userDto.getName())
-                .setFamily(userDto.getFamily())
-                .setEmail(userDto.getEmail())
-                .setPassword(userDto.getPassword())
-                .setRole(userDto.getRole());
+        if (userDto != null) {
+            return (User) new User()
+                    .setStatus(userDto.getStatus())
+                    .setAccount(accountMapper.toAccount(userDto.getAccountDto()))
+                    .setId(userDto.getId())
+                    .setName(userDto.getName())
+                    .setFamily(userDto.getFamily())
+                    .setEmail(userDto.getEmail())
+                    .setPassword(userDto.getPassword())
+                    .setRole(userDto.getRole());
+        }
+        return null;
     }
 
     @Override
     public UserDto toUserDto(User user) {
-        return (UserDto) new UserDto()
-                .setStatus(user.getStatus())
-                .setAccountDto(accountMapper.toAccountDto(user.getAccount()))
-                .setId(user.getId())
-                .setName(user.getName())
-                .setFamily(user.getFamily())
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword())
-                .setRole(user.getRole());
+        if (user != null) {
+            return (UserDto) new UserDto()
+                    .setStatus(user.getStatus())
+                    .setAccountDto(accountMapper.toAccountDto(user.getAccount()))
+                    .setId(user.getId())
+                    .setName(user.getName())
+                    .setFamily(user.getFamily())
+                    .setEmail(user.getEmail())
+                    .setPassword(user.getPassword())
+                    .setRole(user.getRole());
+        }
+        return null;
     }
 }

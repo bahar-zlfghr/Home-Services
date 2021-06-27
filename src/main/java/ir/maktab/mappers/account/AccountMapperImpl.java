@@ -12,15 +12,21 @@ public class AccountMapperImpl implements AccountMapper {
 
     @Override
     public Account toAccount(AccountDto accountDto) {
-        return new Account()
-                .setId(accountDto.getId())
-                .setBalance(accountDto.getBalance());
+        if (accountDto != null) {
+            return new Account()
+                    .setId(accountDto.getId())
+                    .setBalance(accountDto.getBalance());
+        }
+        return null;
     }
 
     @Override
     public AccountDto toAccountDto(Account account) {
-        return new AccountDto()
-                .setId(account.getId())
-                .setBalance(account.getBalance());
+        if (account != null) {
+            return new AccountDto()
+                    .setId(account.getId())
+                    .setBalance(account.getBalance());
+        }
+        return null;
     }
 }

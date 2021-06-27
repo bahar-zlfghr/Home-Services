@@ -25,23 +25,29 @@ public class SubServiceMapperImpl implements SubServiceMapper {
 
     @Override
     public SubService toSubService(SubServiceDto subServiceDto) {
-        return new SubService()
-                .setId(subServiceDto.getId())
-                .setName(subServiceDto.getName())
-                .setBasePrice(subServiceDto.getBasePrice())
-                .setDescription(subServiceDto.getDescription())
-                .setService(serviceMapper.toService(subServiceDto.getServiceDto()))
-                .setSpecialists(subServiceDto.getSpecialistDtos().stream().map(specialistMapper::toSpecialist).collect(Collectors.toSet()));
+        if (subServiceDto != null) {
+            return new SubService()
+                    .setId(subServiceDto.getId())
+                    .setName(subServiceDto.getName())
+                    .setBasePrice(subServiceDto.getBasePrice())
+                    .setDescription(subServiceDto.getDescription())
+                    .setService(serviceMapper.toService(subServiceDto.getServiceDto()))
+                    .setSpecialists(subServiceDto.getSpecialistDtos().stream().map(specialistMapper::toSpecialist).collect(Collectors.toSet()));
+        }
+        return null;
     }
 
     @Override
     public SubServiceDto toSubServiceDto(SubService subService) {
-        return new SubServiceDto()
-                .setId(subService.getId())
-                .setName(subService.getName())
-                .setBasePrice(subService.getBasePrice())
-                .setDescription(subService.getDescription())
-                .setServiceDto(serviceMapper.toServiceDto(subService.getService()))
-                .setSpecialistDtos(subService.getSpecialists().stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
+        if (subService != null) {
+            return new SubServiceDto()
+                    .setId(subService.getId())
+                    .setName(subService.getName())
+                    .setBasePrice(subService.getBasePrice())
+                    .setDescription(subService.getDescription())
+                    .setServiceDto(serviceMapper.toServiceDto(subService.getService()))
+                    .setSpecialistDtos(subService.getSpecialists().stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
+        }
+        return null;
     }
 }

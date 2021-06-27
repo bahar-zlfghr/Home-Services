@@ -12,23 +12,29 @@ public class ManagerMapperImpl implements ManagerMapper {
 
     @Override
     public Manager toManager(ManagerDto managerDto) {
-        return (Manager) new Manager()
-                .setId(managerDto.getId())
-                .setName(managerDto.getName())
-                .setFamily(managerDto.getFamily())
-                .setEmail(managerDto.getEmail())
-                .setPassword(managerDto.getPassword())
-                .setRole(managerDto.getRole());
+        if (managerDto != null) {
+            return (Manager) new Manager()
+                    .setId(managerDto.getId())
+                    .setName(managerDto.getName())
+                    .setFamily(managerDto.getFamily())
+                    .setEmail(managerDto.getEmail())
+                    .setPassword(managerDto.getPassword())
+                    .setRole(managerDto.getRole());
+        }
+        return null;
     }
 
     @Override
     public ManagerDto toManagerDto(Manager manager) {
-        return (ManagerDto) new ManagerDto()
-                .setId(manager.getId())
-                .setName(manager.getName())
-                .setFamily(manager.getFamily())
-                .setEmail(manager.getEmail())
-                .setPassword(manager.getPassword())
-                .setRole(manager.getRole());
+        if (manager != null) {
+            return (ManagerDto) new ManagerDto()
+                    .setId(manager.getId())
+                    .setName(manager.getName())
+                    .setFamily(manager.getFamily())
+                    .setEmail(manager.getEmail())
+                    .setPassword(manager.getPassword())
+                    .setRole(manager.getRole());
+        }
+        return null;
     }
 }

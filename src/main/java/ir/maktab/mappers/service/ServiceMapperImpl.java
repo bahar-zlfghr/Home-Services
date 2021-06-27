@@ -25,17 +25,23 @@ public class ServiceMapperImpl implements ServiceMapper {
 
     @Override
     public Service toService(ServiceDto serviceDto) {
-        return new Service()
-                .setId(serviceDto.getId())
-                .setName(serviceDto.getName())
-                .setSpecialists(serviceDto.getSpecialistDtos().stream().map(specialistMapper::toSpecialist).collect(Collectors.toSet()));
+        if (serviceDto != null) {
+            return new Service()
+                    .setId(serviceDto.getId())
+                    .setName(serviceDto.getName())
+                    .setSpecialists(serviceDto.getSpecialistDtos().stream().map(specialistMapper::toSpecialist).collect(Collectors.toSet()));
+        }
+        return null;
     }
 
     @Override
     public ServiceDto toServiceDto(Service service) {
-        return new ServiceDto()
-                .setId(service.getId())
-                .setName(service.getName())
-                .setSpecialistDtos(service.getSpecialists().stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
+        if (service != null) {
+            return new ServiceDto()
+                    .setId(service.getId())
+                    .setName(service.getName())
+                    .setSpecialistDtos(service.getSpecialists().stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
+        }
+        return null;
     }
 }

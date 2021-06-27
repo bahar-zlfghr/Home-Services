@@ -26,23 +26,29 @@ public class CommentMapperImpl implements CommentMapper {
 
     @Override
     public Comment toComment(CommentDto commentDto) {
-        return new Comment()
-                .setId(commentDto.getId())
-                .setScore(commentDto.getScore())
-                .setDescription(commentDto.getDescription())
-                .setCustomer(customerMapper.toCustomer(commentDto.getCustomerDto()))
-                .setSpecialist(specialistMapper.toSpecialist(commentDto.getSpecialistDto()))
-                .setOrder(orderMapper.toOrder(commentDto.getOrderDto()));
+        if (commentDto != null) {
+            return new Comment()
+                    .setId(commentDto.getId())
+                    .setScore(commentDto.getScore())
+                    .setDescription(commentDto.getDescription())
+                    .setCustomer(customerMapper.toCustomer(commentDto.getCustomerDto()))
+                    .setSpecialist(specialistMapper.toSpecialist(commentDto.getSpecialistDto()))
+                    .setOrder(orderMapper.toOrder(commentDto.getOrderDto()));
+        }
+        return null;
     }
 
     @Override
     public CommentDto toCommentDto(Comment comment) {
-        return new CommentDto()
-                .setId(comment.getId())
-                .setScore(comment.getScore())
-                .setDescription(comment.getDescription())
-                .setCustomerDto(customerMapper.toCustomerDto(comment.getCustomer()))
-                .setSpecialistDto(specialistMapper.toSpecialistDto(comment.getSpecialist()))
-                .setOrderDto(orderMapper.toOrderDto(comment.getOrder()));
+        if (comment != null) {
+            return new CommentDto()
+                    .setId(comment.getId())
+                    .setScore(comment.getScore())
+                    .setDescription(comment.getDescription())
+                    .setCustomerDto(customerMapper.toCustomerDto(comment.getCustomer()))
+                    .setSpecialistDto(specialistMapper.toSpecialistDto(comment.getSpecialist()))
+                    .setOrderDto(orderMapper.toOrderDto(comment.getOrder()));
+        }
+        return null;
     }
 }

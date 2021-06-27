@@ -34,33 +34,39 @@ public class OrderMapperImpl implements OrderMapper {
 
     @Override
     public Order toOrder(OrderDto orderDto) {
-        return new Order()
-                .setId(orderDto.getId())
-                .setCustomer(customerMapper.toCustomer(orderDto.getCustomerDto()))
-                .setSubService(subServiceMapper.toSubService(orderDto.getSubServiceDto()))
-                .setSuggestedPrice(orderDto.getSuggestedPrice())
-                .setDescription(orderDto.getDescription())
-                .setOrderRegistrationDate(orderDto.getOrderRegistrationDate())
-                .setDoDate(orderDto.getDoDate())
-                .setAddress(addressMapper.toAddress(orderDto.getAddressDto()))
-                .setStatus(orderDto.getStatus())
-                .setSpecialist(specialistMapper.toSpecialist(orderDto.getSpecialistDto()))
-                .setOffers(orderDto.getOfferDtos().stream().map(offerMapper::toOffer).collect(Collectors.toSet()));
+        if (orderDto != null) {
+            return new Order()
+                    .setId(orderDto.getId())
+                    .setCustomer(customerMapper.toCustomer(orderDto.getCustomerDto()))
+                    .setSubService(subServiceMapper.toSubService(orderDto.getSubServiceDto()))
+                    .setSuggestedPrice(orderDto.getSuggestedPrice())
+                    .setDescription(orderDto.getDescription())
+                    .setOrderRegistrationDate(orderDto.getOrderRegistrationDate())
+                    .setDoDate(orderDto.getDoDate())
+                    .setAddress(addressMapper.toAddress(orderDto.getAddressDto()))
+                    .setStatus(orderDto.getStatus())
+                    .setSpecialist(specialistMapper.toSpecialist(orderDto.getSpecialistDto()))
+                    .setOffers(orderDto.getOfferDtos().stream().map(offerMapper::toOffer).collect(Collectors.toSet()));
+        }
+        return null;
     }
 
     @Override
     public OrderDto toOrderDto(Order order) {
-        return new OrderDto()
-                .setId(order.getId())
-                .setCustomerDto(customerMapper.toCustomerDto(order.getCustomer()))
-                .setSubServiceDto(subServiceMapper.toSubServiceDto(order.getSubService()))
-                .setSuggestedPrice(order.getSuggestedPrice())
-                .setDescription(order.getDescription())
-                .setOrderRegistrationDate(order.getOrderRegistrationDate())
-                .setDoDate(order.getDoDate())
-                .setAddressDto(addressMapper.toAddressDto(order.getAddress()))
-                .setStatus(order.getStatus())
-                .setSpecialistDto(specialistMapper.toSpecialistDto(order.getSpecialist()))
-                .setOfferDtos(order.getOffers().stream().map(offerMapper::toOfferDto).collect(Collectors.toSet()));
+        if (order != null) {
+            return new OrderDto()
+                    .setId(order.getId())
+                    .setCustomerDto(customerMapper.toCustomerDto(order.getCustomer()))
+                    .setSubServiceDto(subServiceMapper.toSubServiceDto(order.getSubService()))
+                    .setSuggestedPrice(order.getSuggestedPrice())
+                    .setDescription(order.getDescription())
+                    .setOrderRegistrationDate(order.getOrderRegistrationDate())
+                    .setDoDate(order.getDoDate())
+                    .setAddressDto(addressMapper.toAddressDto(order.getAddress()))
+                    .setStatus(order.getStatus())
+                    .setSpecialistDto(specialistMapper.toSpecialistDto(order.getSpecialist()))
+                    .setOfferDtos(order.getOffers().stream().map(offerMapper::toOfferDto).collect(Collectors.toSet()));
+        }
+        return null;
     }
 }
