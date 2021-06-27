@@ -15,7 +15,7 @@ public class Address {
     private String state;
 
     @Column(name = "address")
-    private String formatted_address;
+    private String formattedAddress;
 
     public Integer getId() {
         return id;
@@ -44,12 +44,12 @@ public class Address {
         return this;
     }
 
-    public String getFormatted_address() {
-        return formatted_address;
+    public String getFormattedAddress() {
+        return formattedAddress;
     }
 
-    public Address setFormatted_address(String formatted_address) {
-        this.formatted_address = formatted_address;
+    public Address setFormattedAddress(String formattedAddress) {
+        this.formattedAddress = formattedAddress;
         return this;
     }
 }
