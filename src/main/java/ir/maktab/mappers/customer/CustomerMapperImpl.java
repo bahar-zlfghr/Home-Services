@@ -7,8 +7,6 @@ import ir.maktab.mappers.order.OrderMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-
 /**
  * @author : Bahar Zolfaghari
  **/
@@ -27,7 +25,6 @@ public class CustomerMapperImpl implements CustomerMapper {
     public Customer toCustomer(CustomerDto customerDto) {
         if (customerDto != null) {
             return (Customer) new Customer()
-                    .setOrders(customerDto.getOrderDtos().stream().map(orderMapper::toOrder).collect(Collectors.toSet()))
                     .setStatus(customerDto.getStatus())
                     .setAccount(accountMapper.toAccount(customerDto.getAccountDto()))
                     .setId(customerDto.getId())
@@ -44,7 +41,6 @@ public class CustomerMapperImpl implements CustomerMapper {
     public CustomerDto toCustomerDto(Customer customer) {
         if (customer != null) {
             return (CustomerDto) new CustomerDto()
-                    .setOrderDtos(customer.getOrders().stream().map(orderMapper::toOrderDto).collect(Collectors.toSet()))
                     .setStatus(customer.getStatus())
                     .setAccountDto(accountMapper.toAccountDto(customer.getAccount()))
                     .setId(customer.getId())
