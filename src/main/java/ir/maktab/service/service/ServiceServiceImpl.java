@@ -60,7 +60,7 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public Set<ServiceDto> getAllService() {
+    public Set<ServiceDto> getAllServices() {
         return serviceRepository.getAllServices().stream().map(serviceMapper::toServiceDto).collect(Collectors.toSet());
     }
 }

@@ -15,5 +15,5 @@ public interface ServiceService {
     void UpdateServiceName(Integer id, String name);
     void deleteService(ServiceDto serviceDto);
     ServiceDto getServiceByName(String name) throws NotFoundServiceException;
-    Set<ServiceDto> getAllService();
+    Set<ServiceDto> getAllServices();
 }
