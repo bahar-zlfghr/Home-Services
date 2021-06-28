@@ -1,10 +1,10 @@
 package ir.maktab.web.manager;
 
 import ir.maktab.configuration.LastViewInterceptor;
-import ir.maktab.data.enums.PersonRole;
 import ir.maktab.dtos.ServiceDto;
 import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
+import ir.maktab.dtos.factory.SubserviceFactory;
 import ir.maktab.dtos.filter.UserFilterDto;
 import ir.maktab.dtos.filter.UserFilterResult;
 import ir.maktab.exceptions.*;
@@ -28,7 +28,7 @@ import java.util.Map;
  * @author : Bahar Zolfaghari
  **/
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/admin")
 public class ManagerController {
     private final ManagerService managerService;
     private final UserService userService;
@@ -45,23 +45,16 @@ public class ManagerController {
     }
 
     @GetMapping("/filter")
-    public ModelAndView filterUsers(@RequestParam(value = "role", required = false) String role,
-                                    @RequestParam(value = "name", required = false) String name,
-                                    @RequestParam(value = "family", required = false) String family,
-                                    @RequestParam(value = "email", required = false) String email,
-                                    @RequestParam(value = "specialty", required = false) String specialty,
-                                    @RequestParam(value = "score", required = false) String score) {
-        UserFilterDto userFilterDto = new UserFilterDto()
-                .setName(name)
-                .setFamily(family)
-                .setEmail(email)
-                .setSpeciality(specialty)
-                .setScore(score);
+    public ModelAndView filterUsersForm() {
+        return new ModelAndView(
+                "/manager/filterUser",
+                "userFilterDto", new UserFilterDto());
+    }
 
-        if (role != null && !role.equals("")) {
-            userFilterDto.setRole(PersonRole.valueOf(role.toUpperCase()));
-        }
-
+    @PostMapping("/filter")
+    public ModelAndView filterUsers(@ModelAttribute("userFilterDto") UserFilterDto userFilterDto) {
+        //ToDo: add subservice property
+        //ToDo: pagination
         UserFilterResult result = userService.filterUsers(userFilterDto);
         return new ModelAndView(
                 "/manager/filterUser",
@@ -70,7 +63,6 @@ public class ManagerController {
 
     @GetMapping("/create/service")
     public ModelAndView createServiceForm() {
-
         return new ModelAndView(
                 "/manager/createService",
                 "serviceDto", new ServiceDto());
@@ -80,17 +72,15 @@ public class ManagerController {
     public String createService(@ModelAttribute("serviceDto") @Valid ServiceDto serviceDto,
                                 Model model) throws DuplicateServiceNameException {
         serviceService.saveService(serviceDto);
-
-        model.addAttribute("service", serviceDto);
-
-        return "/manager/serviceSaveSuccess";
+        model.addAttribute("success", true);
+        return "/manager/createService";
     }
 
     @GetMapping("/create/subservice")
     public ModelAndView createSubServiceForm() {
-
-        return new ModelAndView("/manager/createSubService",
-                "services", serviceService.getAllService());
+        return new ModelAndView(
+                "/manager/createSubService",
+                "services", serviceService.getAllServices());
     }
 
     @PostMapping("/create/subservice")
@@ -100,48 +90,32 @@ public class ManagerController {
                                 @RequestParam(value = "description") String description,
                                 Model model) throws DuplicateSubServiceNameException, NotFoundServiceException {
         ServiceDto serviceDto = serviceService.getServiceByName(serviceName);
-
-        SubServiceDto subServiceDto = new SubServiceDto()
-                .setName(subServiceName)
-                .setBasePrice(Long.valueOf(basePrice))
-                .setDescription(description)
-                .setServiceDto(serviceDto);
-
+        SubServiceDto subServiceDto = SubserviceFactory.createSubService(serviceDto, subServiceName, basePrice, description);
         subServiceService.saveSubService(subServiceDto);
-
-        model.addAttribute("service", serviceDto);
-        model.addAttribute("subService", subServiceDto);
-
-        return "/manager/subServiceSaveSuccess";
+        model.addAttribute("success", true);
+        model.addAttribute("services", serviceService.getAllServices());
+        return "/manager/createSubService";
     }
 
     @GetMapping("/add/specialist/subservice")
     public ModelAndView assignSpecialistToSubServiceForm() {
         ModelAndView modelAndView = new ModelAndView("/manager/assignSpecialistToSubService");
-
         modelAndView.getModel().put("subServices", subServiceService.getAllSubServices());
         modelAndView.getModel().put("specialists", specialistService.getAllSpecialists());
-
         return modelAndView;
     }
 
     @PostMapping("/add/specialist/subservice")
     public String assignSpecialistToSubServiceForm(@RequestParam(value = "subServiceName") String subServiceName,
                                                    @RequestParam(value = "specialistEmail") String specialistEmail,
-                                                   Model model) throws NotFoundSubServiceException, NotFoundUserException {
-
+                                                   Model model) throws NotFoundSubServiceException, NotFoundUserException, SubServiceAlreadyProvidedBySpecialistException {
         SubServiceDto subServiceDto = subServiceService.getSubServiceByName(subServiceName);
         SpecialistDto specialistDto = specialistService.getSpecialistByEmail(specialistEmail);
-
-        specialistDto.getSubServiceDtos().add(subServiceDto);
-        subServiceDto.getSpecialistDtos().add(specialistDto);
-
-        subServiceService.updateSubServiceSpecialists(subServiceDto);
-
-        model.addAttribute("subService", subServiceDto);
-        model.addAttribute("specialist", specialistDto);
-
-        return "/manager/assignSpecialistToSubServiceSuccess";
+        subServiceService.updateSubServiceSpecialists(subServiceDto, specialistDto);
+        model.addAttribute("success", true);
+        model.addAttribute("subServices", subServiceService.getAllSubServices());
+        model.addAttribute("specialists", specialistService.getAllSpecialists());
+        return "/manager/assignSpecialistToSubService";
     }
 
     @ExceptionHandler(value = BindException.class)
@@ -151,24 +125,34 @@ public class ManagerController {
     }
 
     @ExceptionHandler(value = DuplicateServiceNameException.class)
-    public ModelAndView duplicateServiceNameErrorHandler(DuplicateServiceNameException ex, HttpServletRequest request) {
+    public ModelAndView duplicateServiceNameExceptionHandler(DuplicateServiceNameException ex, HttpServletRequest request) {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
-
         Map<String, Object> model = new HashMap<>();
         model.put("duplicateServiceName", ex.getMessage());
+        model.put("services", serviceService.getAllServices());
         model.put("serviceDto", new ServiceDto());
-
         return new ModelAndView(lastView, model);
     }
 
     @ExceptionHandler(value = DuplicateSubServiceNameException.class)
-    public ModelAndView duplicateSubServiceNameErrorHandler(DuplicateSubServiceNameException ex, HttpServletRequest request) {
+    public ModelAndView duplicateSubServiceNameExceptionHandler(DuplicateSubServiceNameException ex, HttpServletRequest request) {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
-
         Map<String, Object> model = new HashMap<>();
         model.put("duplicateSubServiceName", ex.getMessage());
+        model.put("subServices", subServiceService.getAllSubServices());
+        model.put("specialists", specialistService.getAllSpecialists());
         model.put("subServiceDto", new SubServiceDto());
+        return new ModelAndView(lastView, model);
+    }
 
+    @ExceptionHandler(value = SubServiceAlreadyProvidedBySpecialistException.class)
+    public ModelAndView subServiceAlreadyProvidedBySpecialistExceptionHandler(SubServiceAlreadyProvidedBySpecialistException ex, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBUTE);
+        Map<String, Object> model = new HashMap<>();
+        model.put("subServiceAlreadyProvidedBySpecialist", ex.getMessage());
+        model.put("subServices", subServiceService.getAllSubServices());
+        model.put("specialists", specialistService.getAllSpecialists());
+        model.put("subServiceDto", new SubServiceDto());
         return new ModelAndView(lastView, model);
     }
 }
