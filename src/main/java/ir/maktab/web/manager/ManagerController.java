@@ -44,11 +44,6 @@ public class ManagerController {
         this.specialistService = specialistService;
     }
 
-    @GetMapping("/admin")
-    public String manager() {
-        return "/manager/manager";
-    }
-
     @GetMapping("/filter")
     public ModelAndView filterUsersForm() {
         return new ModelAndView(
