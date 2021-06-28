@@ -14,6 +14,7 @@ import java.util.Scanner;
  * @author : Bahar Zolfaghari
  **/
 public interface AddressFactory {
+
     static AddressDto getAddress(String latitude, String longitude) throws IOException, ParseException {
         StringBuilder address = new StringBuilder();
         URL url = new URL("https://api.neshan.org/v2/reverse?lat=" + latitude + "&lng=" + longitude);
