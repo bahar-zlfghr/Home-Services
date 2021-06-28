@@ -1,4 +1,4 @@
-function validateForm() {
+function validateCreateSubServiceForm() {
     return !(!validateService() | !validateName() | !validateBasePrice());
 }
 
@@ -16,8 +16,8 @@ function validateService() {
 
 function validateName() {
     var subServiceName = document.getElementById('subServiceName').value;
-    if (subServiceName.length < 5 || subServiceName.length > 30) {
-        document.getElementById('subServiceNameError').innerHTML = 'Sub service name should be between 4 and 30 characters long';
+    if (subServiceName.length < 1 || subServiceName.length > 30) {
+        document.getElementById('subServiceNameError').innerHTML = 'Sub service name should be between 1 and 30 characters long';
         return false;
     } else {
         document.getElementById('subServiceNameError').innerHTML = '';

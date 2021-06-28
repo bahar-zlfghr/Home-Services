@@ -1,4 +1,4 @@
-function validate() {
+function validateAssignSpecialistToSubServiceForm() {
     return !(!validateSubService() | !validateSpecialist());
 }
 
@@ -17,7 +17,7 @@ function validateSubService() {
 function validateSpecialist() {
     var specialist = document.querySelector('input[name="specialistEmail"]:checked');
     if (specialist === null) {
-        document.getElementById('specialistError').innerHTML = 'Choose one sub service';
+        document.getElementById('specialistError').innerHTML = 'Choose one specialist';
         return false;
     }
     else {
