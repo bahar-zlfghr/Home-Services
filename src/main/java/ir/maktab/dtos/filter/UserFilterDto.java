@@ -1,23 +1,20 @@
 package ir.maktab.dtos.filter;
 
-import ir.maktab.data.enums.PersonRole;
-
 /**
  * @author : Bahar Zolfaghari
  **/
 public class UserFilterDto {
-    private PersonRole role;
+    private String role;
     private String name;
     private String family;
     private String Email;
-    private String speciality;
     private String score;
 
-    public PersonRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public UserFilterDto setRole(PersonRole role) {
+    public UserFilterDto setRole(String role) {
         this.role = role;
         return this;
     }
@@ -46,15 +43,6 @@ public class UserFilterDto {
 
     public UserFilterDto setEmail(String email) {
         Email = email;
-        return this;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public UserFilterDto setSpeciality(String speciality) {
-        this.speciality = speciality;
         return this;
     }
 
