@@ -7,7 +7,7 @@ public class AddressDto {
     private Integer id;
     private String city;
     private String state;
-    private String formatted_address;
+    private String formattedAddress;
 
     public Integer getId() {
         return id;
@@ -36,12 +36,12 @@ public class AddressDto {
         return this;
     }
 
-    public String getFormatted_address() {
-        return formatted_address;
+    public String getFormattedAddress() {
+        return formattedAddress;
     }
 
-    public AddressDto setFormatted_address(String formatted_address) {
-        this.formatted_address = formatted_address;
+    public AddressDto setFormattedAddress(String formattedAddress) {
+        this.formattedAddress = formattedAddress;
         return this;
     }
 }

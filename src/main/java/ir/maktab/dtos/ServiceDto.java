@@ -10,7 +10,7 @@ import java.util.Set;
 public class ServiceDto {
     private Integer id;
 
-    @Size(min = 4, max = 30, message = "{service.name.range}")
+    @Size(min = 3, max = 30, message = "{service.name.range}")
     private String name;
 
     private Set<SpecialistDto> specialistDtos = new HashSet<>();
