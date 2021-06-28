@@ -40,7 +40,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void updateAlleyAddress(Integer id, String formatted_address) {
-        addressRepository.updateAlleyAddress(id, formatted_address);
+        addressRepository.updateAddress(id, formatted_address);
     }
 
     @Override

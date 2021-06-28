@@ -76,9 +76,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto getCustomerByEmailAndPassword(String email, String password) throws NotFoundUserException {
-        Optional<Customer> customerByEmailAndPassword = customerRepository.getCustomerByEmailAndPassword(email, password);
-        if (customerByEmailAndPassword.isPresent()) {
-            return customerMapper.toCustomerDto(customerByEmailAndPassword.get());
+        Optional<Customer> customerByEmail = customerRepository.getCustomerByEmail(email);
+        if (customerByEmail.isPresent()) {
+            Customer customer = customerByEmail.get();
+            if (passwordEncoder.matches(password, customer.getPassword())) {
+                return customerMapper.toCustomerDto(customer);
+            }
         }
         throw new NotFoundUserException(environment.getRequiredProperty("user.not.login"));
     }

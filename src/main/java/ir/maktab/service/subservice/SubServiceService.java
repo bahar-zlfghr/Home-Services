@@ -5,6 +5,7 @@ import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
 import ir.maktab.exceptions.DuplicateSubServiceNameException;
 import ir.maktab.exceptions.NotFoundSubServiceException;
+import ir.maktab.exceptions.SubServiceAlreadyProvidedBySpecialistException;
 
 import java.util.Set;
 
@@ -17,11 +18,10 @@ public interface SubServiceService {
     void updateSubServiceName(Integer id, String name);
     void updateSubServiceBasePrice(Integer id, Long basePrice);
     void updateSubServiceDescription(Integer id, String description);
-    void updateSubServiceSpecialists(SubServiceDto subServiceDto);
+    void updateSubServiceSpecialists(SubServiceDto subServiceDto, SpecialistDto specialistDto) throws SubServiceAlreadyProvidedBySpecialistException;
     void deleteSubService(SubServiceDto subServiceDto);
     SubServiceDto getSubServiceByName(String name) throws NotFoundSubServiceException;
     Set<SubServiceDto> getSubServicesByService(ServiceDto serviceDto);
-    void assignSpecialistToSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto);
     void editSubServiceSpecialists(SubServiceDto subServiceDto, Set<SpecialistDto> specialistDtos);
     void deleteSpecialistFromSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto);
     Set<SubServiceDto> getAllSubServices();

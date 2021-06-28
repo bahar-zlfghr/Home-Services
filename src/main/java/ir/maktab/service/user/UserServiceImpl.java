@@ -2,8 +2,8 @@ package ir.maktab.service.user;
 
 import ir.maktab.data.repository.customer.CustomerRepository;
 import ir.maktab.data.repository.specialist.SpecialistRepository;
-import ir.maktab.data.repository.user.CustomerSpecification;
-import ir.maktab.data.repository.user.SpecialistSpecification;
+import ir.maktab.data.repository.customer.CustomerSpecification;
+import ir.maktab.data.repository.specialist.SpecialistSpecification;
 import ir.maktab.dtos.filter.UserFilterDto;
 import ir.maktab.dtos.filter.UserFilterResult;
 import ir.maktab.mappers.customer.CustomerMapper;
@@ -37,10 +37,8 @@ public class UserServiceImpl implements UserService {
         UserFilterResult result = new UserFilterResult();
         result.getCustomerDtos().addAll(customerRepository.findAll(Specification.where(CustomerSpecification.filterCustomers(userFilterDto)))
                 .stream().map(customerMapper::toCustomerDto).collect(Collectors.toSet()));
-
         result.getSpecialistDtos().addAll(specialistRepository.findAll(Specification.where(SpecialistSpecification.filterSpecialists(userFilterDto)))
                 .stream().map(specialistMapper::toSpecialistDto).collect(Collectors.toSet()));
-
         return result;
     }
 }

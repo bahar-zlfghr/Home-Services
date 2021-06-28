@@ -36,6 +36,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void saveOrder(OrderDto orderDto) {
+        orderDto.setStatus(OrderStatus.WAITING_FOR_SPECIALIST_SUGGESTION);
         orderRepository.save(orderMapper.toOrder(orderDto));
     }
 

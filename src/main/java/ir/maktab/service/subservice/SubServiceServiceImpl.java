@@ -5,6 +5,7 @@ import ir.maktab.data.repository.subservice.SubServiceRepository;
 import ir.maktab.dtos.ServiceDto;
 import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
+import ir.maktab.exceptions.SubServiceAlreadyProvidedBySpecialistException;
 import ir.maktab.exceptions.DuplicateSubServiceNameException;
 import ir.maktab.exceptions.NotFoundSubServiceException;
 import ir.maktab.mappers.service.ServiceMapper;
@@ -45,7 +46,7 @@ public class SubServiceServiceImpl implements SubServiceService {
             subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
         }
         else {
-            throw new DuplicateSubServiceNameException(environment.getProperty("sub.service.name.duplicated"));
+            throw new DuplicateSubServiceNameException(environment.getProperty(environment.getProperty("sub.service.name.duplicated")));
         }
     }
 
@@ -65,7 +66,12 @@ public class SubServiceServiceImpl implements SubServiceService {
     }
 
     @Override
-    public void updateSubServiceSpecialists(SubServiceDto subServiceDto) {
+    public void updateSubServiceSpecialists(SubServiceDto subServiceDto, SpecialistDto specialistDto) throws SubServiceAlreadyProvidedBySpecialistException {
+        if (subServiceDto.getSpecialistDtos().stream().map(specialistDto1 -> specialistDto.getEmail()).collect(Collectors.toSet()).contains(specialistDto.getEmail())) {
+            throw new SubServiceAlreadyProvidedBySpecialistException(environment.getProperty("sub.service.already.provided.by.specialist"));
+        }
+        specialistDto.getSubServiceDtos().add(subServiceDto);
+        subServiceDto.getSpecialistDtos().add(specialistDto);
         subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
     }
 
@@ -90,20 +96,18 @@ public class SubServiceServiceImpl implements SubServiceService {
     }
 
     @Override
-    public void assignSpecialistToSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto) {
-        subServiceDto.getSpecialistDtos().add(specialistDto);
-        updateSubServiceSpecialists(subServiceDto);
-    }
-
-    @Override
     public void editSubServiceSpecialists(SubServiceDto subServiceDto, Set<SpecialistDto> specialistDtos) {
-        updateSubServiceSpecialists(subServiceDto);
+        subServiceDto.getSpecialistDtos().clear();
+        subServiceDto.getSpecialistDtos().addAll(specialistDtos);
+        specialistDtos.forEach(specialistDto -> specialistDto.getSubServiceDtos().add(subServiceDto));
+        subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
     }
 
     @Override
     public void deleteSpecialistFromSubService(SubServiceDto subServiceDto, SpecialistDto specialistDto) {
         subServiceDto.getSpecialistDtos().remove(specialistDto);
-        updateSubServiceSpecialists(subServiceDto);
+        specialistDto.getSubServiceDtos().remove(subServiceDto);
+        subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
     }
 
     @Override
