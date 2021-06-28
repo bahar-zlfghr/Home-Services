@@ -1,20 +1,13 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html style="font-size: 16px;">
 <head>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <script src="${pageContext.request.contextPath}/static/js/createSubService.js"></script>
-    <link href="${pageContext.request.contextPath}/static/css/error.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Create Sub Service</title>
+    <title>Manager Panel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css" media="screen">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/home.css" media="screen">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/panel.css" media="screen">
@@ -94,73 +87,59 @@
     </div>
 </header>
 
-<c:if test="${success eq true}">
-    <div style="text-align: center" class="alert alert-success" role="alert">Sub Service Crate Successfully</div>
-</c:if>
+<section class="u-clearfix u-section-1" id="sec-fe12">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-blog u-expanded-width u-repeater u-repeater-1">
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+                    <h4 class="u-blog-control u-text u-text-5">
+                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/filter">Filter Users</a>
+                    </h4>
+                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/filter">
+                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
+                    <a href="${pageContext.request.contextPath}/admin/filter" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Filter Users</a>
+                </div>
+            </div>
 
-<form:form cssClass="p-5"
-           method="POST"
-           action="/admin/create/subservice"
-           onsubmit="return validateCreateSubServiceForm()">
-    <div class="table-responsive">
-        <table class="table">
-            <tr>
-                <td>
-                    <label> Service </label>
-                </td>
-                <td>
-                    <select class="form-select" name="serviceName" id="serviceName">
-                        <option value=""> Select one...</option>
-                        <c:forEach items="${services}" var="service">
-                            <option value="${service.name}"> ${service.name} </option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <span class="error" id="serviceError"></span>
-                </td>
-            </tr>
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+                    <h4 class="u-blog-control u-text u-text-5">
+                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/service">Create Service</a>
+                    </h4>
+                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/service">
+                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
+                    <a href="${pageContext.request.contextPath}/admin/create/service" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create Service</a>
+                </div>
+            </div>
 
-            <tr>
-                <td><label> Name </label></td>
-                <td><input name="subServiceName" id="subServiceName" type="text" class="form-control" placeholder="Sub Service Name" aria-label="Username" aria-describedby="basic-addon1"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <span class="error" id="subServiceNameError"></span>
-                    <span class="error"> ${duplicateSubServiceName} </span>
-                </td>
-            </tr>
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+                    <h4 class="u-blog-control u-text u-text-5">
+                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/subservice">Create Sub Service</a>
+                    </h4>
+                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/subservice">
+                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
+                    <a href="${pageContext.request.contextPath}/admin/create/subservice" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create Sub Service</a>
+                </div>
+            </div>
 
-            <tr>
-                <td><label> Base Price </label></td>
-                <td><input type="number" name="basePrice" id="basePrice" class="form-control" placeholder="Base Price" aria-label="Username" aria-describedby="basic-addon1"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <span class="error" id="basePriceError"></span>
-                </td>
-            </tr>
-
-            <tr>
-                <td><label> Description (Optional) </label></td>
-                <td><textarea name="description" id="description" class="form-control" placeholder="Description" aria-label="Username" aria-describedby="basic-addon1"></textarea></td>
-            </tr>
-
-            <tr>
-                <td>
-                    <input type="submit" value="Crate" class="btn btn-info">
-                </td>
-                <td></td>
-            </tr>
-        </table>
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+                    <h4 class="u-blog-control u-text u-text-5">
+                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/add/specialist/subservice">Assign specialist To Sub Service</a>
+                    </h4>
+                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/add/specialist/subservice">
+                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
+                    <a href="${pageContext.request.contextPath}/admin/add/specialist/subservice" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Assign specialist To Sub Service</a>
+                </div>
+            </div>
+        </div>
     </div>
-</form:form>
+</section>
 
 </body>
 </html>
