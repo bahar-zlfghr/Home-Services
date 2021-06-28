@@ -13,4 +13,19 @@ public class MainController {
     public String home() {
         return "home";
     }
+
+    @GetMapping("/admin")
+    public String manager() {
+        return "/manager/manager";
+    }
+
+    @GetMapping("/specialist")
+    public String specialist() {
+        return "/specialist/specialist";
+    }
+
+    @GetMapping("/customer")
+    public String customer() {
+        return "/customer/customer";
+    }
 }
