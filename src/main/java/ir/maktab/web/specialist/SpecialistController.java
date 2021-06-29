@@ -1,11 +1,7 @@
 package ir.maktab.web.specialist;
 
 import ir.maktab.configuration.LastViewInterceptor;
-import ir.maktab.data.enums.PersonRole;
-import ir.maktab.data.enums.UserStatus;
-import ir.maktab.dtos.AccountDto;
 import ir.maktab.dtos.SpecialistDto;
-import ir.maktab.dtos.factory.AccountFactory;
 import ir.maktab.exceptions.DuplicateEmailException;
 import ir.maktab.exceptions.NotEmptyException;
 import ir.maktab.service.service.ServiceService;
@@ -42,7 +38,6 @@ public class SpecialistController {
 
     @GetMapping("/registration")
     public ModelAndView registrationForm() {
-        //ToDo: Register Not Work !!!
         return new ModelAndView(
                 "/specialist/registration",
                 "specialistDto", new SpecialistDto());
@@ -50,18 +45,12 @@ public class SpecialistController {
 
     @PostMapping("/registration")
     public String registerSpecialist(@ModelAttribute("specialistDto") @Validated(RegistrationGroup.class) SpecialistDto specialistDto,
-                                     @RequestParam("profilePicture") CommonsMultipartFile profilePicture,
+                                     @RequestParam("picture") CommonsMultipartFile picture,
                                      Model model) throws DuplicateEmailException, NotEmptyException {
-        //ToDo: Register Not Work !!!
-        specialistService.checkDuplicateEmail(specialistDto.getEmail());
-        specialistDto.setRole(PersonRole.SPECIALIST);
-        specialistDto.setStatus(UserStatus.NEW);
-        AccountDto accountDto = AccountFactory.createAccount();
-        specialistDto.setAccountDto(accountDto);
-        specialistDto.setScore(0);
-        specialistService.saveSpecialist(specialistDto);
-        model.addAttribute("specialistDto", specialistDto);
-        return "/specialist/registerSuccess";
+        specialistService.saveSpecialist(specialistDto, picture);
+        model.addAttribute("success", true);
+        model.addAttribute("specialistDto", new SpecialistDto());
+        return "/specialist/registration";
     }
 
     @ExceptionHandler(value = BindException.class)
