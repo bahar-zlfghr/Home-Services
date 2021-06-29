@@ -1,8 +1,11 @@
 package ir.maktab.service.specialist;
 
 import ir.maktab.data.domain.Specialist;
+import ir.maktab.data.enums.PersonRole;
+import ir.maktab.data.enums.UserStatus;
 import ir.maktab.data.repository.specialist.SpecialistRepository;
 import ir.maktab.dtos.*;
+import ir.maktab.dtos.factory.AccountFactory;
 import ir.maktab.exceptions.DuplicateEmailException;
 import ir.maktab.exceptions.NotEmptyException;
 import ir.maktab.exceptions.NotFoundUserException;
@@ -15,6 +18,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Optional;
 import java.util.Set;
@@ -47,10 +51,17 @@ public class SpecialistServiceImpl implements SpecialistService {
     }
 
     @Override
-    public void saveSpecialist(SpecialistDto specialistDto) throws NotEmptyException {
-        if (specialistDto.getProfilePicture().length == 0) {
+    public void saveSpecialist(SpecialistDto specialistDto, CommonsMultipartFile picture) throws NotEmptyException, DuplicateEmailException {
+        checkDuplicateEmail(specialistDto.getEmail());
+        AccountDto accountDto = AccountFactory.createAccount();
+        specialistDto.setScore(0)
+                .setStatus(UserStatus.NEW)
+                .setAccountDto(accountDto)
+                .setRole(PersonRole.SPECIALIST);
+        if (picture.getBytes().length == 0) {
             throw new NotEmptyException(environment.getProperty("specialist.profile.picture.not.empty"));
         }
+        specialistDto.setProfilePicture(picture.getBytes());
         String password = specialistDto.getPassword();
         specialistDto.setPassword(passwordEncoder.encode(password));
         specialistRepository.save(specialistMapper.toSpecialist(specialistDto));

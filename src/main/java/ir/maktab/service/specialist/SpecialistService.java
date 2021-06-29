@@ -4,6 +4,7 @@ import ir.maktab.dtos.*;
 import ir.maktab.exceptions.DuplicateEmailException;
 import ir.maktab.exceptions.NotEmptyException;
 import ir.maktab.exceptions.NotFoundUserException;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
  **/
 public interface SpecialistService {
 
-    void saveSpecialist(SpecialistDto specialistDto) throws NotEmptyException;
+    void saveSpecialist(SpecialistDto specialistDto, CommonsMultipartFile picture) throws NotEmptyException, DuplicateEmailException;
     void updateSpecialistScore(Integer id, Integer score);
     void updateSpecialistProfilePicture(Integer id, byte[] profilePicture);
     void updateSpecialistSubServices(Integer id, Set<SubServiceDto> subServiceDtos);
