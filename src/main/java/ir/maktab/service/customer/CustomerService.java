@@ -13,8 +13,8 @@ import java.util.Set;
  **/
 public interface CustomerService {
 
-    void saveCustomer(CustomerDto customerDto);
-    void updateCustomerStatus(Integer id, UserStatus userStatus);
+    void saveCustomer(CustomerDto customerDto) throws DuplicateEmailException;
+    void updateCustomerStatus(Integer id, UserStatus status);
     void updateCustomerOrders(Integer id, Set<OrderDto> orderDtos);
     void updateCustomerPassword(String email, String previousPassword, String newPassword);
     void deleteCustomer(CustomerDto customerDto);

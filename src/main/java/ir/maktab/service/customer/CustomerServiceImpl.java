@@ -39,15 +39,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void saveCustomer(CustomerDto customerDto) {
+    public void saveCustomer(CustomerDto customerDto) throws DuplicateEmailException {
+        checkDuplicateEmail(customerDto.getEmail());
         String password = customerDto.getPassword();
         customerDto.setPassword(passwordEncoder.encode(password));
         customerRepository.save(customerMapper.toCustomer(customerDto));
     }
 
     @Override
-    public void updateCustomerStatus(Integer id, UserStatus userStatus) {
-        customerRepository.updateCustomerStatus(id, userStatus);
+    public void updateCustomerStatus(Integer id, UserStatus status) {
+        customerRepository.updateCustomerStatus(id, status);
     }
 
     @Override
@@ -83,14 +84,14 @@ public class CustomerServiceImpl implements CustomerService {
                 return customerMapper.toCustomerDto(customer);
             }
         }
-        throw new NotFoundUserException(environment.getRequiredProperty("user.not.login"));
+        throw new NotFoundUserException(environment.getProperty("user.not.login"));
     }
 
     @Override
     public void checkDuplicateEmail(String email) throws DuplicateEmailException {
         Optional<Customer> customerByEmail = customerRepository.getCustomerByEmail(email);
         if (customerByEmail.isPresent()) {
-            throw new DuplicateEmailException(environment.getProperty("email.duplicated"));
+            throw new DuplicateEmailException(environment.getProperty("user.email.duplicated"));
         }
     }
 }
