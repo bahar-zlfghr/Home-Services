@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
@@ -7,12 +8,14 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Specialist</title>
+    <title>Customer Panel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css" media="screen">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/home.css" media="screen">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/panel.css" media="screen">
-    <script class="u-script" type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="${pageContext.request.contextPath}/static/js/main.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.js"
+            defer=""></script>
+    <script class="u-script" type="text/javascript" src="${pageContext.request.contextPath}/static/js/main.js"
+            defer=""></script>
     <meta name="generator" content="Nicepage 3.18.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
@@ -22,7 +25,7 @@
         "name": "home-services"
     }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Specialist">
+    <meta property="og:title" content="Customer">
     <meta property="og:type" content="website">
 </head>
 <body class="u-body">
@@ -55,7 +58,7 @@
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="/specialist" style="padding: 10px 20px;">Specialist</a>
+                            href="/customer" style="padding: 10px 20px;">Customer</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -72,13 +75,20 @@
                     <div class="u-sidenav-overflow">
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/" style="padding: 10px 20px;">Home</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/"
+                                                      style="padding: 10px 20px;">Home</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/specialist" style="padding: 10px 20px;">Specialist</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/customer"
+                                                      style="padding: 10px 20px;">Customer</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/change-password" style="padding: 10px 20px;">Change Password</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/change-password"
+                                                      style="padding: 10px 20px;">Change Password</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout" style="padding: 10px 20px;">Logout</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout"
+                                                      style="padding: 10px 20px;">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -92,17 +102,17 @@
 <section class="u-clearfix u-section-1" id="sec-fe12">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-blog u-expanded-width u-repeater u-repeater-1">
-            <%--<div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
                 <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                     <h4 class="u-blog-control u-text u-text-5">
-                        <a class="u-post-header-link" href="###">Post 1 Headline</a>
+                        <a class="u-post-header-link" href="/customer/create-order">Create Order</a>
                     </h4>
-                    <a class="u-post-header-link" href="###">
+                    <a class="u-post-header-link" href="/customer/create-order">
                         <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
                     <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
-                    <a href="###" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Read More</a>
+                    <a href="/customer/create-order" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create Order</a>
                 </div>
-            </div>--%>
+            </div>
         </div>
     </div>
 </section>
