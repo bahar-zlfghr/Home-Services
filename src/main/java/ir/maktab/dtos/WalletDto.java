@@ -3,7 +3,7 @@ package ir.maktab.dtos;
 /**
  * @author : Bahar Zolfaghari
  **/
-public class AccountDto {
+public class WalletDto {
     private Integer id;
     private Long balance;
 
@@ -11,7 +11,7 @@ public class AccountDto {
         return id;
     }
 
-    public AccountDto setId(Integer id) {
+    public WalletDto setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -20,7 +20,7 @@ public class AccountDto {
         return balance;
     }
 
-    public AccountDto setBalance(Long balance) {
+    public WalletDto setBalance(Long balance) {
         this.balance = balance;
         return this;
     }

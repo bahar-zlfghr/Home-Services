@@ -7,7 +7,8 @@ import ir.maktab.data.enums.UserStatus;
  **/
 public class UserDto extends PersonDto {
     private UserStatus status;
-    private AccountDto accountDto;
+    private WalletDto walletDto;
+    private ConfirmationTokenDto confirmationTokenDto;
 
     public UserStatus getStatus() {
         return status;
@@ -18,12 +19,21 @@ public class UserDto extends PersonDto {
         return this;
     }
 
-    public AccountDto getAccountDto() {
-        return accountDto;
+    public WalletDto getWalletDto() {
+        return walletDto;
     }
 
-    public UserDto setAccountDto(AccountDto accountDto) {
-        this.accountDto = accountDto;
+    public UserDto setWalletDto(WalletDto walletDto) {
+        this.walletDto = walletDto;
+        return this;
+    }
+
+    public ConfirmationTokenDto getConfirmationTokenDto() {
+        return confirmationTokenDto;
+    }
+
+    public UserDto setConfirmationTokenDto(ConfirmationTokenDto confirmationTokenDto) {
+        this.confirmationTokenDto = confirmationTokenDto;
         return this;
     }
 }
