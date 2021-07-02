@@ -30,7 +30,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Filter[] getServletFilters() {
-        //ToDo: add custom filter
         return null;
     }
 }

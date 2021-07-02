@@ -19,7 +19,7 @@ import java.util.Properties;
  **/
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "ir.maktab.data.repository")
+@EnableJpaRepositories(basePackages = {"ir.maktab.data.repository", "ir.maktab.configuration"})
 public class SpringDataConfiguration {
     private final DatabaseProperties databaseProperties;
 
