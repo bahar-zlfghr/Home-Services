@@ -2,7 +2,8 @@ package ir.maktab.mappers.customer;
 
 import ir.maktab.data.domain.Customer;
 import ir.maktab.dtos.CustomerDto;
-import ir.maktab.mappers.account.AccountMapper;
+import ir.maktab.mappers.token.ConfirmationTokenMapper;
+import ir.maktab.mappers.wallet.WalletMapper;
 import ir.maktab.mappers.order.OrderMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -13,12 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerMapperImpl implements CustomerMapper {
     private final OrderMapper orderMapper;
-    private final AccountMapper accountMapper;
+    private final WalletMapper walletMapper;
+    private final ConfirmationTokenMapper confirmationTokenMapper;
 
     @Lazy
-    public CustomerMapperImpl(OrderMapper orderMapper, AccountMapper accountMapper) {
+    public CustomerMapperImpl(OrderMapper orderMapper, WalletMapper walletMapper, ConfirmationTokenMapper confirmationTokenMapper) {
         this.orderMapper = orderMapper;
-        this.accountMapper = accountMapper;
+        this.walletMapper = walletMapper;
+        this.confirmationTokenMapper = confirmationTokenMapper;
     }
 
     @Override
@@ -26,7 +29,8 @@ public class CustomerMapperImpl implements CustomerMapper {
         if (customerDto != null) {
             return (Customer) new Customer()
                     .setStatus(customerDto.getStatus())
-                    .setAccount(accountMapper.toAccount(customerDto.getAccountDto()))
+                    .setWallet(walletMapper.toWallet(customerDto.getWalletDto()))
+                    .setConfirmationToken(confirmationTokenMapper.toConfirmationToken(customerDto.getConfirmationTokenDto()))
                     .setId(customerDto.getId())
                     .setName(customerDto.getName())
                     .setFamily(customerDto.getFamily())
@@ -42,7 +46,8 @@ public class CustomerMapperImpl implements CustomerMapper {
         if (customer != null) {
             return (CustomerDto) new CustomerDto()
                     .setStatus(customer.getStatus())
-                    .setAccountDto(accountMapper.toAccountDto(customer.getAccount()))
+                    .setWalletDto(walletMapper.toWalletDto(customer.getWallet()))
+                    .setConfirmationTokenDto(confirmationTokenMapper.toConfirmationTokenDto(customer.getConfirmationToken()))
                     .setId(customer.getId())
                     .setName(customer.getName())
                     .setFamily(customer.getFamily())
