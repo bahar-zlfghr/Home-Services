@@ -14,7 +14,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Register</title>
+    <title>Register Specialist</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css" media="screen">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/home.css" media="screen">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/panel.css" media="screen">
@@ -60,16 +60,19 @@
                 <ul class="u-nav u-unstyled u-nav-1">
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/" style="padding: 10px 20px;">Home</a>
+                            href="/" style="padding: 10px 20px;">Home</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/specialist"
-                            style="padding: 10px 20px;">Specialist</a>
+                            href="/specialist/register" style="padding: 10px 20px;">Register Specialist</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="#" style="padding: 10px 20px;">About</a>
+                            href="/customer/register" style="padding: 10px 20px;">Register Customer</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            href="/login" style="padding: 10px 20px;">Login</a>
                     </li>
                 </ul>
             </div>
@@ -79,15 +82,19 @@
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/"
+                                                      href="$/"
                                                       style="padding: 10px 20px;">Home</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/specialist"
-                                                      style="padding: 10px 20px;">Specialist</a>
+                                                      href="/specialist/register"
+                                                      style="padding: 10px 20px;">Register Specialist</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#"
-                                                      style="padding: 10px 20px;">About</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/customer/register"
+                                                      style="padding: 10px 20px;">Register Customer</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login"
+                                                      style="padding: 10px 20px;">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -98,16 +105,16 @@
     </div>
 </header>
 
-<c:if test="${success eq true}">
-    <div style="text-align: center" class="alert alert-success" role="alert">Specialist Save Successfully</div>
+<c:if test="${successRegister eq true}">
+    <div style="text-align: center" class="alert alert-success" role="alert">A verification email has been sent to: ${specialistEmail}</div>
 </c:if>
 
 <form:form cssClass="p-5"
            method="POST"
-           action="/specialist/registration"
+           action="/specialist/register"
            modelAttribute="specialistDto"
            enctype="multipart/form-data">
-    <div class="table-responsive">
+    <div class="table-responsive" style="padding: 100px">
         <table class="table">
             <tr>
                 <td><form:label path="name"> Name </form:label></td>
