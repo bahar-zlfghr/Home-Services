@@ -1,8 +1,10 @@
 package ir.maktab.data.repository.specialist;
 
 import ir.maktab.data.domain.*;
+import ir.maktab.data.enums.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,10 @@ public interface SpecialistRepository extends JpaRepository<Specialist, Integer>
 
     @Query("UPDATE Specialist AS s SET s.score = :score WHERE s.id = :id")
     void updateSpecialistScore(@Param("id") Integer id, @Param("score") Integer score);
+
+    @Modifying
+    @Query("UPDATE Specialist AS s SET s.status = :status WHERE s.id = :id")
+    void updateSpecialistStatus(@Param("id") Integer id, @Param("status") UserStatus status);
 
     @Query("UPDATE Specialist AS s SET s.profilePicture = :profilePicture WHERE s.id = :id")
     void updateSpecialistProfilePicture(@Param("id") Integer id, @Param("profilePicture") byte[] profilePicture);
