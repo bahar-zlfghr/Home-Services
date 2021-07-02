@@ -92,17 +92,28 @@
 <section class="u-clearfix u-section-1" id="sec-fe12">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-blog u-expanded-width u-repeater u-repeater-1">
-            <%--<div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
                 <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                     <h4 class="u-blog-control u-text u-text-5">
-                        <a class="u-post-header-link" href="###">Post 1 Headline</a>
+                        <a class="u-post-header-link" href="/specialist/assign-service">Assign To Service</a>
                     </h4>
-                    <a class="u-post-header-link" href="###">
+                    <a class="u-post-header-link" href="/specialist/assign-service">
                         <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
                     <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
-                    <a href="###" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Read More</a>
+                    <a href="/specialist/assign-service" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Read More</a>
                 </div>
-            </div>--%>
+            </div>
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+                    <h4 class="u-blog-control u-text u-text-5">
+                        <a class="u-post-header-link" href="/specialist/assign-sub-service">Assign To Sub Service</a>
+                    </h4>
+                    <a class="u-post-header-link" href="/specialist/assign-sub-service">
+                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
+                    <a href="/specialist/assign-sub-service" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Read More</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
