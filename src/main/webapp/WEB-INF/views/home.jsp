@@ -1,7 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
 <head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Home Repair Services">
@@ -54,23 +58,19 @@
                 <ul class="u-nav u-unstyled u-nav-1">
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/" style="padding: 10px 20px;">Home</a>
+                            href="/" style="padding: 10px 20px;">Home</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/admin" style="padding: 10px 20px;">Manager</a>
+                            href="/specialist/register" style="padding: 10px 20px;">Register Specialist</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/specialist" style="padding: 10px 20px;">Specialist</a>
+                            href="/customer/register" style="padding: 10px 20px;">Register Customer</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/customer" style="padding: 10px 20px;">Customer</a>
-                    </li>
-                    <li class="u-nav-item"><a
-                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="#" style="padding: 10px 20px;">About</a>
+                            href="/login" style="padding: 10px 20px;">Login</a>
                     </li>
                 </ul>
             </div>
@@ -79,20 +79,20 @@
                     <div class="u-sidenav-overflow">
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="${pageContext.request.contextPath}/"
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="$/"
                                                       style="padding: 10px 20px;">Home</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="${pageContext.request.contextPath}/admin"
-                                                      style="padding: 10px 20px;">Manager</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/specialist/register"
+                                                      style="padding: 10px 20px;">Register Specialist</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="${pageContext.request.contextPath}/specialist"
-                                                      style="padding: 10px 20px;">Specialist</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/customer/register"
+                                                      style="padding: 10px 20px;">Register Customer</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="${pageContext.request.contextPath}/customer"
-                                                      style="padding: 10px 20px;">Customer</a>
-                            </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#"
-                                                      style="padding: 10px 20px;">About</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login"
+                                                      style="padding: 10px 20px;">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -102,6 +102,10 @@
         </nav>
     </div>
 </header>
+
+<%--<c:if test="${message ne null}">
+    <div style="text-align: center" class="alert alert-success" role="alert">${message}</div>
+</c:if>--%>
 
 <section class="u-align-center u-clearfix u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-section-1"
          id="carousel_ee2f">
