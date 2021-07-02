@@ -6,6 +6,7 @@ import ir.maktab.data.enums.OrderStatus;
 import ir.maktab.dtos.CustomerDto;
 import ir.maktab.dtos.OrderDto;
 import ir.maktab.dtos.SpecialistDto;
+import ir.maktab.exceptions.InvalidSuggestedPriceException;
 
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
  **/
 public interface OrderService {
 
-    void saveOrder(OrderDto orderDto);
+    void saveOrder(OrderDto orderDto) throws InvalidSuggestedPriceException;
     void updateOrderSuggestedPrice(Integer id, Long suggestedPrice);
     void updateOrderDescription(Integer id, String description);
     void updateOrderAddress(Integer id, Address address);

@@ -2,8 +2,10 @@ package ir.maktab.service.service;
 
 import ir.maktab.data.repository.service.ServiceRepository;
 import ir.maktab.dtos.ServiceDto;
+import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.exceptions.DuplicateServiceNameException;
 import ir.maktab.exceptions.NotFoundServiceException;
+import ir.maktab.exceptions.ServiceAlreadyProvidedBySpecialistException;
 import ir.maktab.mappers.service.ServiceMapper;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,16 @@ public class ServiceServiceImpl implements ServiceService {
         else {
             throw new DuplicateServiceNameException(environment.getProperty("service.name.duplicated"));
         }
+    }
+
+    @Override
+    public void updateServiceSpecialists(ServiceDto serviceDto, SpecialistDto specialistDto) throws ServiceAlreadyProvidedBySpecialistException {
+        if (serviceDto.getSpecialistDtos().stream().map(specialistDto1 -> specialistDto.getEmail()).collect(Collectors.toSet()).contains(specialistDto.getEmail())) {
+            throw new ServiceAlreadyProvidedBySpecialistException(environment.getProperty("sub.service.already.provided.by.specialist"));
+        }
+        specialistDto.getServiceDtos().add(serviceDto);
+        serviceDto.getSpecialistDtos().add(specialistDto);
+        serviceRepository.save(serviceMapper.toService(serviceDto));
     }
 
     @Override

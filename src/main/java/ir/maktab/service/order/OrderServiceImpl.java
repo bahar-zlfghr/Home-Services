@@ -7,9 +7,11 @@ import ir.maktab.data.repository.order.OrderRepository;
 import ir.maktab.dtos.CustomerDto;
 import ir.maktab.dtos.OrderDto;
 import ir.maktab.dtos.SpecialistDto;
+import ir.maktab.exceptions.InvalidSuggestedPriceException;
 import ir.maktab.mappers.customer.CustomerMapper;
 import ir.maktab.mappers.order.OrderMapper;
 import ir.maktab.mappers.specialist.SpecialistMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,16 +28,21 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final CustomerMapper customerMapper;
     private final SpecialistMapper specialistMapper;
+    private final Environment environment;
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper, CustomerMapper customerMapper, SpecialistMapper specialistMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper, CustomerMapper customerMapper, SpecialistMapper specialistMapper, Environment environment) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
         this.customerMapper = customerMapper;
         this.specialistMapper = specialistMapper;
+        this.environment = environment;
     }
 
     @Override
-    public void saveOrder(OrderDto orderDto) {
+    public void saveOrder(OrderDto orderDto) throws InvalidSuggestedPriceException {
+        if (orderDto.getSuggestedPrice() < orderDto.getSubServiceDto().getBasePrice()) {
+            throw new InvalidSuggestedPriceException(environment.getProperty("order.invalid.suggested.price"));
+        }
         orderDto.setStatus(OrderStatus.WAITING_FOR_SPECIALIST_SUGGESTION);
         orderRepository.save(orderMapper.toOrder(orderDto));
     }

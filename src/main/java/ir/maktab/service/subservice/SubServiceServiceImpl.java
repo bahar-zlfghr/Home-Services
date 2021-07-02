@@ -5,6 +5,7 @@ import ir.maktab.data.repository.subservice.SubServiceRepository;
 import ir.maktab.dtos.ServiceDto;
 import ir.maktab.dtos.SpecialistDto;
 import ir.maktab.dtos.SubServiceDto;
+import ir.maktab.exceptions.ServiceAlreadyProvidedBySpecialistException;
 import ir.maktab.exceptions.SubServiceAlreadyProvidedBySpecialistException;
 import ir.maktab.exceptions.DuplicateSubServiceNameException;
 import ir.maktab.exceptions.NotFoundSubServiceException;
@@ -46,7 +47,7 @@ public class SubServiceServiceImpl implements SubServiceService {
             subServiceRepository.save(subServiceMapper.toSubService(subServiceDto));
         }
         else {
-            throw new DuplicateSubServiceNameException(environment.getProperty(environment.getProperty("sub.service.name.duplicated")));
+            throw new DuplicateSubServiceNameException(environment.getProperty("sub.service.name.duplicated"));
         }
     }
 

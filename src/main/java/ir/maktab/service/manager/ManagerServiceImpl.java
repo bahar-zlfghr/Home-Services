@@ -5,6 +5,7 @@ import ir.maktab.data.repository.manager.ManagerRepository;
 import ir.maktab.dtos.ManagerDto;
 import ir.maktab.exceptions.NotFoundUserException;
 import ir.maktab.mappers.manager.ManagerMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +19,12 @@ import java.util.Optional;
 public class ManagerServiceImpl implements ManagerService {
     private final ManagerRepository managerRepository;
     private final ManagerMapper managerMapper;
+    private final Environment environment;
 
-    public ManagerServiceImpl(ManagerRepository managerRepository, ManagerMapper managerMapper) {
+    public ManagerServiceImpl(ManagerRepository managerRepository, ManagerMapper managerMapper, Environment environment) {
         this.managerRepository = managerRepository;
         this.managerMapper = managerMapper;
+        this.environment = environment;
     }
 
     @Override
@@ -60,6 +63,6 @@ public class ManagerServiceImpl implements ManagerService {
         if (managerByEmailAndPassword.isPresent()) {
             return managerMapper.toManagerDto(managerByEmailAndPassword.get());
         }
-        throw new NotFoundUserException("user.not.login");
+        throw new NotFoundUserException(environment.getProperty("user.not.login"));
     }
 }
