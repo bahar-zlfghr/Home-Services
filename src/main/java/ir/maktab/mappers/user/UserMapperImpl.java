@@ -2,7 +2,8 @@ package ir.maktab.mappers.user;
 
 import ir.maktab.data.domain.User;
 import ir.maktab.dtos.UserDto;
-import ir.maktab.mappers.account.AccountMapper;
+import ir.maktab.mappers.token.ConfirmationTokenMapper;
+import ir.maktab.mappers.wallet.WalletMapper;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class UserMapperImpl implements UserMapper {
-    private final AccountMapper accountMapper;
+    private final WalletMapper walletMapper;
+    private final ConfirmationTokenMapper confirmationTokenMapper;
 
-    public UserMapperImpl(AccountMapper accountMapper) {
-        this.accountMapper = accountMapper;
+    public UserMapperImpl(WalletMapper walletMapper, ConfirmationTokenMapper confirmationTokenMapper) {
+        this.walletMapper = walletMapper;
+        this.confirmationTokenMapper = confirmationTokenMapper;
     }
 
     @Override
@@ -21,7 +24,8 @@ public class UserMapperImpl implements UserMapper {
         if (userDto != null) {
             return (User) new User()
                     .setStatus(userDto.getStatus())
-                    .setAccount(accountMapper.toAccount(userDto.getAccountDto()))
+                    .setWallet(walletMapper.toWallet(userDto.getWalletDto()))
+                    .setConfirmationToken(confirmationTokenMapper.toConfirmationToken(userDto.getConfirmationTokenDto()))
                     .setId(userDto.getId())
                     .setName(userDto.getName())
                     .setFamily(userDto.getFamily())
@@ -37,7 +41,8 @@ public class UserMapperImpl implements UserMapper {
         if (user != null) {
             return (UserDto) new UserDto()
                     .setStatus(user.getStatus())
-                    .setAccountDto(accountMapper.toAccountDto(user.getAccount()))
+                    .setWalletDto(walletMapper.toWalletDto(user.getWallet()))
+                    .setConfirmationTokenDto(confirmationTokenMapper.toConfirmationTokenDto(user.getConfirmationToken()))
                     .setId(user.getId())
                     .setName(user.getName())
                     .setFamily(user.getFamily())
