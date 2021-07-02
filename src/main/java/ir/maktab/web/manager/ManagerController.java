@@ -195,7 +195,6 @@ public class ManagerController {
         model.put("subServiceAlreadyProvidedBySpecialist", ex.getMessage());
         model.put("subServices", subServiceService.getAllSubServices());
         model.put("specialists", specialistService.getAllSpecialists());
-        model.put("subServiceDto", new SubServiceDto());
         return new ModelAndView(lastView, model);
     }
 
@@ -207,7 +206,6 @@ public class ManagerController {
         model.put("serviceAlreadyProvidedBySpecialist", ex.getMessage());
         model.put("services", serviceService.getAllServices());
         model.put("specialists", specialistService.getAllSpecialists());
-        model.put("serviceDto", new SubServiceDto());
         return new ModelAndView(lastView, model);
     }
 
