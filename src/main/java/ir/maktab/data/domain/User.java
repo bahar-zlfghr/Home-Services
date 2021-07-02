@@ -7,14 +7,19 @@ import javax.persistence.*;
 /**
  * @author : Bahar Zolfaghari
  **/
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends Person {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
+
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "confirm_token_id")
+    private ConfirmationToken confirmationToken;
 
     public UserStatus getStatus() {
         return status;
@@ -25,12 +30,21 @@ public class User extends Person {
         return this;
     }
 
-    public Account getAccount() {
-        return account;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public User setAccount(Account account) {
-        this.account = account;
+    public User setWallet(Wallet wallet) {
+        this.wallet = wallet;
+        return this;
+    }
+
+    public ConfirmationToken getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public User setConfirmationToken(ConfirmationToken confirmationToken) {
+        this.confirmationToken = confirmationToken;
         return this;
     }
 }
