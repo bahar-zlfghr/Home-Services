@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
@@ -8,13 +9,16 @@
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>Manager Panel</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css" media="screen">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/home.css" media="screen">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/panel.css" media="screen">
-    <script class="u-script" type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="${pageContext.request.contextPath}/static/js/main.js" defer=""></script>
+    <link rel="stylesheet" href="/static/css/main.css" media="screen">
+    <link rel="stylesheet" href="/static/css/home.css" media="screen">
+    <link rel="stylesheet" href="/static/css/panel.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/static/js/jquery.js"
+            defer=""></script>
+    <script class="u-script" type="text/javascript" src="/static/js/main.js"
+            defer=""></script>
     <meta name="generator" content="Nicepage 3.18.2, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link id="u-theme-google-font" rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     <script type="application/ld+json">{
         "@context": "http://schema.org",
         "@type": "Organization",
@@ -50,15 +54,19 @@
                 <ul class="u-nav u-unstyled u-nav-1">
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/" style="padding: 10px 20px;">Home</a>
+                            href="/" style="padding: 10px 20px;">Home</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/admin" style="padding: 10px 20px;">Manager</a>
+                            href="/admin" style="padding: 10px 20px;">Manager</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="#" style="padding: 10px 20px;">About</a>
+                            href="/change-password" style="padding: 10px 20px;">Change Password</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            href="/logout" style="padding: 10px 20px;">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -68,15 +76,20 @@
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/"
+                                                      href="/"
                                                       style="padding: 10px 20px;">Home</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/admin"
+                                                      href="/admin"
                                                       style="padding: 10px 20px;">Manager</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#"
-                                                      style="padding: 10px 20px;">About</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/change-password"
+                                                      style="padding: 10px 20px;">Change Password</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/logout"
+                                                      style="padding: 10px 20px;">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -93,53 +106,100 @@
             <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
                 <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                     <h4 class="u-blog-control u-text u-text-5">
-                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/filter">Filter Users</a>
+                        <a class="u-post-header-link" href="/admin/filter-users">Filter
+                            Users</a>
                     </h4>
-                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/filter">
-                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
-                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
-                    <a href="${pageContext.request.contextPath}/admin/filter" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Filter Users</a>
+                    <a class="u-post-header-link" href="/admin/filter-users">
+                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3"
+                             src="/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum
+                        dolor sit amet.
+                    </div>
+                    <a href="/admin/filter-users"
+                       class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Filter
+                        Users</a>
                 </div>
             </div>
 
             <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
                 <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                     <h4 class="u-blog-control u-text u-text-5">
-                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/service">Create Service</a>
+                        <a class="u-post-header-link" href="/admin/create-service">Create
+                            Service</a>
                     </h4>
-                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/service">
-                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
-                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
-                    <a href="${pageContext.request.contextPath}/admin/create/service" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create Service</a>
+                    <a class="u-post-header-link" href="/admin/create-service">
+                        <img alt="Oops..." class="u-blog-control u-expanded-width u-image u-image-default u-image-3"
+                             src="/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum
+                        dolor sit amet.
+                    </div>
+                    <a href="/admin/create-service"
+                       class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create
+                        Service</a>
                 </div>
             </div>
 
             <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
                 <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                     <h4 class="u-blog-control u-text u-text-5">
-                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/subservice">Create Sub Service</a>
+                        <a class="u-post-header-link" href="/admin/create-sub-service">Create
+                            Sub Service</a>
                     </h4>
-                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/create/subservice">
-                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
-                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
-                    <a href="${pageContext.request.contextPath}/admin/create/subservice" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create Sub Service</a>
+                    <a class="u-post-header-link" href="/admin/create-sub-service">
+                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3"
+                             src="/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum
+                        dolor sit amet.
+                    </div>
+                    <a href="/admin/create-sub-service"
+                       class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Create
+                        Sub Service</a>
                 </div>
             </div>
 
             <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
                 <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                     <h4 class="u-blog-control u-text u-text-5">
-                        <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/add/specialist/subservice">Assign specialist To Sub Service</a>
+                        <a class="u-post-header-link"
+                           href="/admin/add-specialist-sub-service">Assign specialist
+                            To Sub Service</a>
                     </h4>
-                    <a class="u-post-header-link" href="${pageContext.request.contextPath}/admin/add/specialist/subservice">
-                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3" src="${pageContext.request.contextPath}/static/image/4.jpg"></a>
-                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum dolor sit amet.</div>
-                    <a href="${pageContext.request.contextPath}/admin/add/specialist/subservice" class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Assign specialist To Sub Service</a>
+                    <a class="u-post-header-link"
+                       href="/admin/add-specialist-sub-service">
+                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3"
+                             src="/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum
+                        dolor sit amet.
+                    </div>
+                    <a href="/admin/add-specialist-sub-service"
+                       class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Assign
+                        specialist To Sub Service</a>
+                </div>
+            </div>
+
+            <div class="u-blog-post u-container-style u-repeater-item u-video-cover u-white">
+                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+                    <h4 class="u-blog-control u-text u-text-5">
+                        <a class="u-post-header-link"
+                           href="/admin/add-specialist-service">Assign specialist
+                            To Service</a>
+                    </h4>
+                    <a class="u-post-header-link"
+                       href="/admin/add-specialist-service">
+                        <img alt="Oops.." class="u-blog-control u-expanded-width u-image u-image-3"
+                             src="/static/image/4.jpg"></a>
+                    <div class="u-blog-control u-post-content u-text u-text-6 fr-view">Sample small text. Lorem ipsum
+                        dolor sit amet.
+                    </div>
+                    <a href="/admin/add-specialist-service"
+                       class="u-blog-control u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-3">Assign
+                        specialist To Service</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 </body>
 </html>

@@ -55,15 +55,19 @@
                 <ul class="u-nav u-unstyled u-nav-1">
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/" style="padding: 10px 20px;">Home</a>
+                            href="/" style="padding: 10px 20px;">Home</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/admin" style="padding: 10px 20px;">Manager</a>
+                            href="/admin" style="padding: 10px 20px;">Manager</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="#" style="padding: 10px 20px;">About</a>
+                            href="/change-password" style="padding: 10px 20px;">Change Password</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            href="/logout" style="padding: 10px 20px;">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -73,15 +77,20 @@
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/"
+                                                      href="/"
                                                       style="padding: 10px 20px;">Home</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/manager"
+                                                      href="/admin"
                                                       style="padding: 10px 20px;">Manager</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#"
-                                                      style="padding: 10px 20px;">About</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/change-password"
+                                                      style="padding: 10px 20px;">Change Password</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/logout"
+                                                      style="padding: 10px 20px;">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -93,10 +102,10 @@
 </header>
 
 <form:form cssClass="m-5 p-5 text-center"
-           action="/admin/filter"
+           action="/admin/filter-users"
            method="POST"
            modelAttribute="userFilterDto">
-    <div class="table-responsive">
+    <div class="table-responsive" style="padding: 100px;">
         <table class="table">
             <tr>
                 <th>Role</th>
@@ -147,7 +156,7 @@
                 <th> Email </th>
                 <th> Role </th>
                 <th> Status </th>
-                <th> Balance </th>
+                <th> Wallet Balance </th>
                 <th> Score </th>
             </tr>
             <c:forEach items="${users.customerDtos}" var="customer">
@@ -157,7 +166,7 @@
                     <td> ${customer.email} </td>
                     <td> ${customer.role} </td>
                     <td> ${customer.status} </td>
-                    <td> ${customer.accountDto.balance} </td>
+                    <td> ${customer.walletDto.balance} </td>
                     <td> - </td>
                 </tr>
             </c:forEach>
@@ -168,7 +177,7 @@
                     <td> ${specialist.email} </td>
                     <td> ${specialist.role} </td>
                     <td> ${specialist.status} </td>
-                    <td> ${specialist.accountDto.balance} </td>
+                    <td> ${specialist.walletDto.balance} </td>
                     <td> ${specialist.score} </td>
                 </tr>
             </c:forEach>

@@ -57,15 +57,19 @@
                 <ul class="u-nav u-unstyled u-nav-1">
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/" style="padding: 10px 20px;">Home</a>
+                            href="/" style="padding: 10px 20px;">Home</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="${pageContext.request.contextPath}/admin" style="padding: 10px 20px;">Manager</a>
+                            href="/admin" style="padding: 10px 20px;">Manager</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="#" style="padding: 10px 20px;">About</a>
+                            href="/change-password" style="padding: 10px 20px;">Change Password</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            href="/logout" style="padding: 10px 20px;">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -75,15 +79,20 @@
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/"
+                                                      href="/"
                                                       style="padding: 10px 20px;">Home</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      href="${pageContext.request.contextPath}/admin"
+                                                      href="/admin"
                                                       style="padding: 10px 20px;">Manager</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#"
-                                                      style="padding: 10px 20px;">About</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/change-password"
+                                                      style="padding: 10px 20px;">Change Password</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      href="/logout"
+                                                      style="padding: 10px 20px;">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -94,15 +103,15 @@
     </div>
 </header>
 
-<c:if test="${success eq true}">
+<c:if test="${successCreateSubService eq true}">
     <div style="text-align: center" class="alert alert-success" role="alert">Sub Service Crate Successfully</div>
 </c:if>
 
 <form:form cssClass="p-5"
            method="POST"
-           action="/admin/create/subservice"
+           action="/admin/create-sub-service"
            onsubmit="return validateCreateSubServiceForm()">
-    <div class="table-responsive">
+    <div class="table-responsive" style="padding: 100px;">
         <table class="table">
             <tr>
                 <td>
