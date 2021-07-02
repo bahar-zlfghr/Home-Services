@@ -6,7 +6,7 @@ import javax.persistence.*;
  * @author : Bahar Zolfaghari
  **/
 @Entity
-public class Account {
+public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,7 +18,7 @@ public class Account {
         return id;
     }
 
-    public Account setId(Integer id) {
+    public Wallet setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -27,7 +27,7 @@ public class Account {
         return balance;
     }
 
-    public Account setBalance(Long balance) {
+    public Wallet setBalance(Long balance) {
         this.balance = balance;
         return this;
     }

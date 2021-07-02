@@ -18,11 +18,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "ORDER_CUSTOMER_FK"))
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subService_id", foreignKey = @ForeignKey(name = "ORDER_SUB_SERVICE_FK"))
     private SubService subService;
 
@@ -44,7 +44,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "specialist_id", foreignKey = @ForeignKey(name = "ORDER_SPECIALIST_FK"))
     private Specialist specialist;
 

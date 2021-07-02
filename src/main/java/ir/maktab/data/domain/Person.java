@@ -7,7 +7,8 @@ import javax.persistence.*;
 /**
  * @author : Bahar Zolfaghari
  **/
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
